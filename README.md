@@ -40,6 +40,8 @@ Die Grafiken lassen sich bei Bedarf neu erzeugen: `python3 tools/make_drops.py` 
 **GitHub Pages:** Repository → *Settings → Pages* → *Deploy from a branch* → Branch wählen, Ordner **`/docs`**.
 Für die eigene Domain eine Datei `docs/CNAME` mit dem Inhalt `www.schick-aesthetik.de` anlegen und beim Domain-Anbieter einen CNAME-Eintrag auf `<benutzername>.github.io` setzen.
 
+**Hostinger (Git-Verbindung):** Das Repository wird komplett nach `public_html` geladen. Die Datei `.htaccess` im Hauptordner leitet alle Aufrufe intern auf `docs/` um. So funktionieren die sauberen Adressen, und Quellcode-Dateien sind nicht abrufbar. Wichtig: Bei Hostinger muss das Installationsverzeichnis **leer** bleiben (also direkt `public_html`).
+
 **Anderer Webspace (z. B. IONOS, Strato):** einfach den *Inhalt* von `docs/` per FTP hochladen.
 
 Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-Unternehmensprofil** anlegen. Das ist wichtig für die lokale Suche.
