@@ -14,7 +14,7 @@ SITE = {
     "practice": "Praxis für Ästhetik",
     "claim": "Gesundheit · Ästhetik · Präzision",
     "profession": "Zahnärztin & Heilpraktikerin",
-    "email": "praxis@schick-aesthetics.de",
+    "email": "praxis@schick-aesthetics.com",
     # Telefonnummer eintragen, sobald vorhanden (z. B. "+49 2663 123456").
     # Solange leer, werden Anruf-Buttons automatisch ausgeblendet.
     "phone": "",

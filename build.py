@@ -1121,7 +1121,7 @@ def page_contact():
     page = {
         "path": "kontakt/",
         "title": "Kontakt & Anfahrt – Praxis Schloß Westerburg | Dr. Schick",
-        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Schloß Westerburg, 56457 Westerburg. E-Mail: praxis@schick-aesthetics.de – Termine nach Vereinbarung.",
+        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Schloß Westerburg, 56457 Westerburg. E-Mail: praxis@schick-aesthetics.com – Termine nach Vereinbarung.",
         "crumbs": [("Start", ""), ("Kontakt", "kontakt/")],
         "page_type": "ContactPage",
     }

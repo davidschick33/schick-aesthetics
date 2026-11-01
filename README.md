@@ -20,11 +20,11 @@ Eine schnelle, statische Website ohne Baukasten, ohne Cookies und ohne Tracking.
 ## Online-Terminbuchung
 
 **Einrichtung bei Hostinger (einmalig):**
-1. Im hPanel unter **E-Mails** das Postfach **praxis@schick-aesthetics.de** anlegen. Über dieses Postfach werden die Buchungs-E-Mails versendet.
+1. Im hPanel unter **E-Mails** das Postfach **praxis@schick-aesthetics.com** anlegen. Über dieses Postfach werden die Buchungs-E-Mails versendet.
 2. Eine Testbuchung machen und prüfen, ob beide E-Mails ankommen (auch im Spam-Ordner nachsehen).
 
 **Verwaltung für die Praxis:** `https://<domain>/verwaltung/`
-- Anmeldung ohne Passwort: Ein 6-stelliger Code kommt per E-Mail an praxis@schick-aesthetics.de.
+- Anmeldung ohne Passwort: Ein 6-stelliger Code kommt per E-Mail an praxis@schick-aesthetics.com.
 - Alle kommenden Termine ansehen und absagen (optional mit E-Mail an den Patienten).
 - Tage oder Zeiten sperren, z. B. für Urlaub oder Termine, die telefonisch vergeben wurden. Gesperrte Zeiten erscheinen im Kalender als belegt.
 
@@ -78,7 +78,7 @@ Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-
 8. **Sprechzeiten für die Online-Buchung**: Aktuell sind Platzhalter eingetragen (Di + Do 15–19 Uhr, Sa 9–13 Uhr). Bitte die echten Zeiten in `content.py` → `BOOKING` eintragen.
 9. **Model-Fotos**: Bitte sicherstellen, dass ihr die Nutzungsrechte an den drei Model-Bildern habt, z. B. eine Lizenz der Bildagentur oder des Herstellers.
 10. **Homöopathische Eigenbluttherapie**: Der Text ist neu und allgemein formuliert. Bitte fachlich gegenlesen.
-11. **Domain**: Die E-Mail lautet jetzt `@schick-aesthetics.de`. Wenn auch die Website unter `schick-aesthetics.de` läuft, muss `url` in `content.py` angepasst werden. Davon hängen Canonical-Links, Sitemap und Schema-Daten ab.
+11. **Domain**: Die E-Mail lautet jetzt `praxis@schick-aesthetics.com`. Wenn auch die Website unter `schick-aesthetics.com` läuft, muss `url` in `content.py` angepasst werden. Davon hängen Canonical-Links, Sitemap und Schema-Daten ab.
 12. **Logo**: Aktuell ist eine Text-Wortmarke im Logo-Stil umgesetzt. Sobald das Logo als Datei vorliegt (SVG oder PNG mit transparentem Hintergrund), kann es eingesetzt werden.
 
 **Bewusst nicht veröffentlicht:** Steuernummer, Steuer-ID, Kontonummer und die Privatadresse.
