@@ -1052,8 +1052,11 @@ def page_booking():
     booking_block = "" if SITE["booking_url"] else (
         '<div class="glass panel booking-inline" id="booking-widget" aria-live="polite"><p class="bk-loading">Freie Termine werden geladen …</p></div>'
         '<noscript><style>#terminanfrage{display:grid!important}#booking-widget{display:none}</style></noscript>')
+    def rhythm_note(d):
+        rh = BOOKING.get("rhythm", {}).get(d)
+        return f" (alle {rh['weeks']} Wochen)" if rh else ""
     hours = "".join(
-        f"<li>{d}: {', '.join(a + '–' + b + ' Uhr' for a, b in r)}</li>" for d, r in BOOKING["hours"].items() if r)
+        f"<li>{d}: {', '.join(a + '–' + b + ' Uhr' for a, b in r)}{rhythm_note(d)}</li>" for d, r in BOOKING["hours"].items() if r)
     page["body"] = f"""
 {page_hero(page, "Termin &amp; Beratung", "Termin buchen", "Im Kalender sehen Sie alle freien Termine. Wählen Sie Ihren Wunschtermin – persönlich in der Praxis oder als telefonische Beratung – und buchen Sie direkt. Die Bestätigung erhalten Sie sofort per E-Mail.", ctas=False)}
 <section class="section-sm">

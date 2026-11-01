@@ -549,6 +549,11 @@ BOOKING = {
         "Samstag": [["11:00", "14:00"]],
         "Sonntag": [],
     },
+    # Tage, die nicht jede Woche stattfinden: Rhythmus in Wochen ab einem Starttag
+    # (Samstag alle 3 Wochen, beginnend am 7. November 2026)
+    "rhythm": {
+        "Samstag": {"weeks": 3, "start": "2026-11-07"},
+    },
     "slot_minutes": 30,          # Länge eines Termins
     "weeks_ahead": 10,           # wie weit im Voraus gebucht werden kann
     "min_notice_hours": 24,      # frühestens so viele Stunden im Voraus buchbar

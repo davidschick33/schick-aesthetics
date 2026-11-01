@@ -168,6 +168,16 @@ function day_times(string $date): array
     $dt = new DateTimeImmutable($date);
     $wd = WEEKDAYS_DE[(int) $dt->format('N')];
     $ranges = $c['hours'][$wd] ?? [];
+    // Rhythmus, z. B. Samstag nur alle 3 Wochen ab einem Starttag
+    if (!empty($c['rhythm'][$wd])) {
+        $r = $c['rhythm'][$wd];
+        $start = new DateTimeImmutable($r['start']);
+        $weeks = max(1, (int) $r['weeks']);
+        $diff = (int) $start->diff($dt)->format('%r%a');
+        if ($diff < 0 || intdiv($diff, 7) % $weeks !== 0) {
+            return [];
+        }
+    }
     $step = max(5, (int) ($c['slot_minutes'] ?? 30));
     $out = [];
     foreach ($ranges as $r) {

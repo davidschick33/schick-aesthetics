@@ -274,7 +274,7 @@ $store = $loggedIn ? with_store(function (array &$s) {
       <h3 style="margin-top:24px;font-size:1.3rem">Sprechzeiten</h3>
       <ul class="small">
         <?php foreach (WEEKDAYS_DE as $wd): $r = $c['hours'][$wd] ?? []; ?>
-          <li><?= h($wd) ?>: <?= $r ? h(implode(', ', array_map(fn($x) => $x[0] . '–' . $x[1], $r))) : 'keine Online-Termine' ?></li>
+          <li><?= h($wd) ?>: <?= $r ? h(implode(', ', array_map(fn($x) => $x[0] . '–' . $x[1], $r))) . (!empty($c['rhythm'][$wd]) ? ' (alle ' . (int) $c['rhythm'][$wd]['weeks'] . ' Wochen ab ' . h(date_de($c['rhythm'][$wd]['start'])) . ')' : '') : 'keine Online-Termine' ?></li>
         <?php endforeach; ?>
       </ul>
       <p class="small muted">Die regelmäßigen Sprechzeiten werden in <code>content.py</code> festgelegt.</p>

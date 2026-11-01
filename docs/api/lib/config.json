@@ -18,6 +18,12 @@
     ],
     "Sonntag": []
   },
+  "rhythm": {
+    "Samstag": {
+      "weeks": 3,
+      "start": "2026-11-07"
+    }
+  },
   "slot_minutes": 30,
   "weeks_ahead": 10,
   "min_notice_hours": 24,
