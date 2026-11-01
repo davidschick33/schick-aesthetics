@@ -180,7 +180,7 @@ $store = $loggedIn ? with_store(function (array &$s) {
 <main class="section-sm">
 <div class="container">
   <div class="admin-head">
-    <p class="brand"><span class="brand-name">Schick</span><span class="brand-sub">Terminverwaltung</span></p>
+    <p class="brand"><span class="brand-name">Dr. Schick</span><span class="brand-sub">Terminverwaltung</span></p>
     <?php if ($loggedIn): ?>
       <form method="post" class="inline"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><button class="btn btn-ghost btn-sm" name="do" value="logout">Abmelden</button></form>
     <?php endif; ?>

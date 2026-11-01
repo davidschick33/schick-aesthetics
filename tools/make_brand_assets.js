@@ -21,22 +21,22 @@ background:radial-gradient(circle at 35% 30%,#fff,#eef3f4 60%,#cfdde1)}
 span{font-family:C;font-size:${size * 0.72}px;line-height:1;margin-top:-${size * 0.08}px}</style><span class="bronze">S</span>`;
 
 const logo = `<style>${fonts} body{width:1000px;height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent}
-.n{font-family:C;font-size:190px;line-height:.9}.s{font-family:J;font-size:30px;letter-spacing:.34em;margin-top:18px;color:#26292b;padding-left:.34em}
+.n{font-family:C;font-size:150px;line-height:.9;white-space:nowrap}.s{font-family:J;font-size:30px;letter-spacing:.34em;margin-top:18px;color:#26292b;padding-left:.34em}
 .c{font-family:J;font-size:20px;letter-spacing:.3em;color:#a2765a;margin-top:14px}</style>
-<div class="n bronze">Schick</div><div class="s">MEDICAL AESTHETICS</div><div class="c">PRÄZISION · ÄSTHETIK · GESUNDHEIT</div>`;
+<div class="n bronze">Dr. Schick</div><div class="s">MEDICAL AESTHETICS</div><div class="c">GESUNDHEIT · ÄSTHETIK · PRÄZISION</div>`;
 
 const og = `<style>${fonts} body{width:1200px;height:630px;position:relative;overflow:hidden;
 background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
 .drops{position:absolute;inset:0;background:url(${assets}/img/drops-hero.webp) right center/auto 120% no-repeat}
 .txt{position:absolute;left:70px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;width:640px}
-.n{font-family:C;font-size:150px;line-height:.9}.s{font-family:J;font-size:24px;letter-spacing:.34em;color:#26292b;margin-top:14px}
+.n{font-family:C;font-size:116px;line-height:.9;white-space:nowrap}.s{font-family:J;font-size:24px;letter-spacing:.34em;color:#26292b;margin-top:14px}
 .c{font-family:J;font-size:17px;letter-spacing:.28em;color:#a2765a;margin-top:12px}
 .h{font-family:CI;font-size:42px;color:#2f5560;margin-top:40px;line-height:1.15}
 .p{font-family:JL;font-size:24px;color:#545b5f;margin-top:14px}
 .photo{position:absolute;right:70px;top:55px;width:370px;height:520px;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(31,60,70,.6)}
 .photo img{width:100%;height:100%;object-fit:cover}</style>
 <div class="drops"></div>
-<div class="txt"><div class="n bronze">Schick</div><div class="s">MEDICAL AESTHETICS</div><div class="c">ZAHNÄRZTIN &amp; HEILPRAKTIKERIN</div>
+<div class="txt"><div class="n bronze">Dr. Schick</div><div class="s">MEDICAL AESTHETICS</div><div class="c">ZAHNÄRZTIN &amp; HEILPRAKTIKERIN</div>
 <div class="h">Natürliche Schönheit,<br>zahnmedizinisch präzise.</div><div class="p">Dr. Karina Schick · Schloß Westerburg</div></div>
 <div class="photo"><img src="${assets}/img/dr-karina-schick.jpg"></div>`;
 

@@ -9,10 +9,10 @@ Nach einer Änderung:  python3 build.py   (erzeugt den Ordner docs/ neu)
 SITE = {
     "url": "https://www.schick-aesthetik.de",  # ohne Schrägstrich am Ende
     "brand": "Schick Medical Aesthetics",
-    "brand_short": "Schick",
+    "brand_short": "Dr. Schick",
     "owner": "Dr. Karina Schick",
     "practice": "Praxis für Ästhetik",
-    "claim": "Präzision · Ästhetik · Gesundheit",
+    "claim": "Gesundheit · Ästhetik · Präzision",
     "profession": "Zahnärztin & Heilpraktikerin",
     "email": "praxis@schick-aesthetics.de",
     # Telefonnummer eintragen, sobald vorhanden (z. B. "+49 2663 123456").

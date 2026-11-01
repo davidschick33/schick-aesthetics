@@ -1261,7 +1261,7 @@ def page_forms():
 
 def form_header(title, sub):
     return f"""<div class="no-print btn-row" style="margin-bottom:20px"><button class="btn" type="button" onclick="window.print()">Drucken / als PDF speichern</button></div>
-<p class="brand" style="display:inline-flex"><span class="brand-name">Schick</span><span class="brand-sub">Medical Aesthetics</span></p>
+<p class="brand" style="display:inline-flex"><span class="brand-name">{SITE["brand_short"]}</span><span class="brand-sub">Medical Aesthetics</span></p>
 <p class="small muted">{SITE["owner"]} · {SITE["practice"]} · {SITE["street"]} · {SITE["zip"]} {SITE["city"]} · {SITE["email"]}</p>
 <h2 style="border:0;margin-top:.6em">{title}</h2><p>{sub}</p>"""
 
