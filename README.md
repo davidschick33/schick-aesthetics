@@ -87,6 +87,6 @@ Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_fl
 8. **Sprechzeiten für die Online-Buchung**: Dienstag 8–14 Uhr und Samstag 11–14 Uhr alle 3 Wochen ab 21. November 2026 (änderbar in `content.py` → `BOOKING`).
 9. **Model-Fotos**: Bitte sicherstellen, dass ihr die Nutzungsrechte an den drei Model-Bildern habt, z. B. eine Lizenz der Bildagentur oder des Herstellers.
 10. **Homöopathische Eigenbluttherapie**: Der Text ist neu und allgemein formuliert. Bitte fachlich gegenlesen.
-11. **Logo**: Aktuell ist eine Text-Wortmarke im Logo-Stil umgesetzt. Sobald das Logo als Datei vorliegt (SVG oder PNG mit transparentem Hintergrund), kann es eingesetzt werden.
+11. **Logo**: Das Logo wurde aus einem Foto freigestellt und vektorisiert. Liegt die Original-Datei (SVG, PDF oder AI) vor, kann sie die Dateien `src/assets/img/logo-*.svg` ersetzen.
 
 **Bewusst nicht veröffentlicht:** Steuernummer, Steuer-ID, Kontonummer und die Privatadresse.
