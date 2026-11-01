@@ -1,6 +1,6 @@
 # Hostinger / Apache / LiteSpeed:
 # Die fertige Website liegt im Ordner docs/. Diese Regeln liefern sie unter
-# der Hauptadresse aus (www.schick-aesthetik.de/leistungen/ -> docs/leistungen/),
+# der Hauptadresse aus (www.schick-aesthetics.com/leistungen/ -> docs/leistungen/),
 # ohne dass "docs" in der Adresse erscheint. Quellcode-Dateien (build.py usw.)
 # sind dadurch von außen nicht erreichbar.
 

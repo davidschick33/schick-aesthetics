@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Statischer Seitengenerator für schick-aesthetik.de.
+"""Statischer Seitengenerator für schick-aesthetics.com.
 
     python3 build.py
 
 Erzeugt die komplette Website im Ordner docs/ (für GitHub Pages oder jeden
 beliebigen Webspace – einfach den Inhalt von docs/ hochladen).
 Jede Seite liegt als <permalink>/index.html vor, dadurch entstehen saubere
-URLs wie https://www.schick-aesthetik.de/leistungen/hyaluron-faltenbehandlung/
+URLs wie https://www.schick-aesthetics.com/leistungen/hyaluron-faltenbehandlung/
 """
 import html
 import json
@@ -1161,7 +1161,7 @@ def page_imprint():
     page = {
         "path": "impressum/",
         "title": "Impressum | Dr. Karina Schick – Medical Aesthetics",
-        "description": "Impressum der Website schick-aesthetik.de – Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg, 56457 Westerburg.",
+        "description": "Impressum der Website schick-aesthetics.com – Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg, 56457 Westerburg.",
         "crumbs": [("Start", ""), ("Impressum", "impressum/")],
     }
     phone = f"<br>Telefon: {esc(SITE['phone_display'] or SITE['phone'])}" if SITE["phone"] else ""
@@ -1196,7 +1196,7 @@ def page_privacy():
     page = {
         "path": "datenschutz/",
         "title": "Datenschutzerklärung | Dr. Karina Schick",
-        "description": "Datenschutzerklärung der Website schick-aesthetik.de: Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.",
+        "description": "Datenschutzerklärung der Website schick-aesthetics.com: Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.",
         "crumbs": [("Start", ""), ("Datenschutz", "datenschutz/")],
     }
     phone = f"<br>Telefon: {esc(SITE['phone_display'] or SITE['phone'])}" if SITE["phone"] else ""

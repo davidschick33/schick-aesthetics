@@ -1,7 +1,7 @@
 # Dr. Schick Medical Aesthetics – Website
 
 Website für **Dr. Karina Schick, Zahnärztin & Heilpraktikerin**, Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg.
-Ziel-Domain: <https://www.schick-aesthetik.de>
+Ziel-Domain: <https://www.schick-aesthetics.com>
 
 Eine schnelle, statische Website ohne Baukasten, ohne Cookies und ohne Tracking. Die fertigen Seiten liegen im Ordner **`docs/`**.
 
@@ -58,13 +58,22 @@ Die Grafiken lassen sich bei Bedarf neu erzeugen: `python3 tools/make_drops.py` 
 ## Veröffentlichen
 
 **Hostinger:** siehe unten. **GitHub Pages** (ohne Online-Buchung, da kein PHP): Repository → *Settings → Pages* → *Deploy from a branch* → Branch wählen, Ordner **`/docs`**.
-Für die eigene Domain eine Datei `docs/CNAME` mit dem Inhalt `www.schick-aesthetik.de` anlegen und beim Domain-Anbieter einen CNAME-Eintrag auf `<benutzername>.github.io` setzen.
+Für die eigene Domain eine Datei `docs/CNAME` mit dem Inhalt `www.schick-aesthetics.com` anlegen und beim Domain-Anbieter einen CNAME-Eintrag auf `<benutzername>.github.io` setzen.
 
 **Hostinger (Git-Verbindung):** Das Repository wird komplett nach `public_html` geladen. Die Datei `.htaccess` im Hauptordner leitet alle Aufrufe intern auf `docs/` um. So funktionieren die sauberen Adressen, und Quellcode-Dateien sind nicht abrufbar. Wichtig: Bei Hostinger muss das Installationsverzeichnis **leer** bleiben (also direkt `public_html`).
 
 **Anderer Webspace (z. B. IONOS, Strato):** einfach den *Inhalt* von `docs/` per FTP hochladen.
 
 Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-Unternehmensprofil** anlegen. Das ist wichtig für die lokale Suche.
+
+## Flyer
+
+Im Ordner `flyer/` liegt ein Flyer (DIN A5, Vorder- und Rückseite, ohne Preise):
+- `Flyer-Dr-Schick-A5.pdf`: zum Ansehen und Versenden
+- `Flyer-Dr-Schick-A5-Druck-3mm-Beschnitt.pdf`: für die Druckerei (154 × 216 mm inkl. 3 mm Beschnitt)
+- Der QR-Code führt direkt zur Online-Terminbuchung.
+
+Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_flyer.js`.
 
 ## Bitte vor dem Livegang prüfen ⚠️
 
@@ -78,7 +87,6 @@ Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-
 8. **Sprechzeiten für die Online-Buchung**: Dienstag 8–14 Uhr und Samstag 11–14 Uhr alle 3 Wochen ab 21. November 2026 (änderbar in `content.py` → `BOOKING`).
 9. **Model-Fotos**: Bitte sicherstellen, dass ihr die Nutzungsrechte an den drei Model-Bildern habt, z. B. eine Lizenz der Bildagentur oder des Herstellers.
 10. **Homöopathische Eigenbluttherapie**: Der Text ist neu und allgemein formuliert. Bitte fachlich gegenlesen.
-11. **Domain**: Die E-Mail lautet jetzt `praxis@schick-aesthetics.com`. Wenn auch die Website unter `schick-aesthetics.com` läuft, muss `url` in `content.py` angepasst werden. Davon hängen Canonical-Links, Sitemap und Schema-Daten ab.
-12. **Logo**: Aktuell ist eine Text-Wortmarke im Logo-Stil umgesetzt. Sobald das Logo als Datei vorliegt (SVG oder PNG mit transparentem Hintergrund), kann es eingesetzt werden.
+11. **Logo**: Aktuell ist eine Text-Wortmarke im Logo-Stil umgesetzt. Sobald das Logo als Datei vorliegt (SVG oder PNG mit transparentem Hintergrund), kann es eingesetzt werden.
 
 **Bewusst nicht veröffentlicht:** Steuernummer, Steuer-ID, Kontonummer und die Privatadresse.

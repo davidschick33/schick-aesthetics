@@ -7,7 +7,7 @@ Nach einer Änderung:  python3 build.py   (erzeugt den Ordner docs/ neu)
 # Stammdaten
 # ---------------------------------------------------------------------------
 SITE = {
-    "url": "https://www.schick-aesthetik.de",  # ohne Schrägstrich am Ende
+    "url": "https://www.schick-aesthetics.com",  # ohne Schrägstrich am Ende
     "brand": "Dr. Schick Medical Aesthetics",
     "brand_short": "Dr. Schick",
     "owner": "Dr. Karina Schick",

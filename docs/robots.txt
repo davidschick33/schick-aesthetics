@@ -3,4 +3,4 @@ Allow: /
 Disallow: /verwaltung/
 Disallow: /api/
 
-Sitemap: https://www.schick-aesthetik.de/sitemap.xml
+Sitemap: https://www.schick-aesthetics.com/sitemap.xml
