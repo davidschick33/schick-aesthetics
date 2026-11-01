@@ -236,7 +236,7 @@ function cancel_page(string $title, string $html): void
         . '<meta name="robots" content="noindex, nofollow"><title>' . h($title) . ' | ' . h(cfg()['brand']) . '</title>'
         . '<link rel="stylesheet" href="/assets/css/style.css"></head><body><div class="water-bg" aria-hidden="true"></div>'
         . '<main class="section"><div class="container narrow"><div class="glass panel">'
-        . '<p class="brand"><span class="brand-name">Dr. Schick</span><span class="brand-sub">Medical Aesthetics</span></p>'
+        . '<p class="brand"><img class="brand-logo" src="/assets/img/logo-dr-schick.svg" width="3675" height="1389" alt="Dr. Schick"><span class="brand-sub">Medical Aesthetics</span></p>'
         . '<h1 style="font-size:2.2rem;margin-top:24px">' . h($title) . '</h1>' . $html
         . '<p class="small muted" style="margin-top:28px"><a href="/">Zur Startseite</a></p></div></div></main></body></html>';
     exit;

@@ -281,10 +281,10 @@ def model_img(p, idx, lazy=True):
             f'<img src="{rel(p, "assets/img/" + name + ".jpg")}" width="{w}" height="{h}" alt="{alt}"{load}></picture>')
 
 
-def brand_html(p):
+def brand_html(p, logo="logo-dr-schick.svg"):
     return (
         f'<a class="brand" href="{rel(p, "")}" aria-label="{esc(SITE["brand"])} – zur Startseite">'
-        f'<span class="brand-name">{SITE["brand_short"]}</span>'
+        f'<img class="brand-logo" src="{rel(p, "assets/img/" + logo)}" width="3675" height="1389" alt="{SITE["brand_short"]}">'
         f'<span class="brand-sub">Medical Aesthetics</span></a>'
     )
 
@@ -343,7 +343,7 @@ def footer(page):
     return f"""<footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      {brand_html(p)}
+      {brand_html(p, "logo-dr-schick-hell.svg")}
       <p class="footer-claim">{SITE["claim"]}</p>
       <p>{SITE["owner"]}<br>{SITE["profession"]}</p>
     </div>
@@ -1261,7 +1261,7 @@ def page_forms():
 
 def form_header(title, sub):
     return f"""<div class="no-print btn-row" style="margin-bottom:20px"><button class="btn" type="button" onclick="window.print()">Drucken / als PDF speichern</button></div>
-<p class="brand" style="display:inline-flex"><span class="brand-name">{SITE["brand_short"]}</span><span class="brand-sub">Medical Aesthetics</span></p>
+<p class="brand" style="display:inline-flex"><img class="brand-logo" src="{rel("patientenformulare/x/", "assets/img/logo-dr-schick.svg")}" width="3675" height="1389" alt="{SITE["brand_short"]}"><span class="brand-sub">Medical Aesthetics</span></p>
 <p class="small muted">{SITE["owner"]} · {SITE["practice"]} · {SITE["street"]} · {SITE["zip"]} {SITE["city"]} · {SITE["email"]}</p>
 <h2 style="border:0;margin-top:.6em">{title}</h2><p>{sub}</p>"""
 

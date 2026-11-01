@@ -170,13 +170,17 @@ li { margin-bottom: 0.35em; }
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 78px; }
-.brand { display: inline-flex; flex-direction: column; align-items: flex-start; text-decoration: none; line-height: 1; color: var(--ink); }
+.brand { display: inline-flex; flex-direction: column; align-items: center; text-decoration: none; line-height: 1; color: var(--ink); }
 .brand-name {
   font-family: var(--serif); font-weight: 500; font-size: 2.1rem; letter-spacing: 0.01em;
   background: linear-gradient(120deg, var(--bronze-dark), var(--bronze-light) 45%, var(--bronze) 70%, var(--bronze-dark));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.brand-sub { font-family: var(--sans); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.34em; text-transform: uppercase; margin-top: 4px; color: var(--ink); }
+.brand-sub { font-family: var(--sans); font-weight: 400; font-size: 0.6rem; letter-spacing: 0.34em; text-transform: uppercase; margin-top: 3px; padding-left: 0.34em; color: var(--ink); }
+.brand-logo { display: block; height: 58px; width: auto; }
+.site-footer .brand-logo { height: 76px; }
+.form-sheet .brand-logo, .panel .brand .brand-logo { height: 60px; }
+@media (max-width: 560px) { .site-header .brand-logo { height: 46px; } }
 .brand-lotus { display: none; }
 
 .main-nav { display: flex; align-items: center; gap: 6px; }
