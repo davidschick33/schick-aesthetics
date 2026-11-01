@@ -180,7 +180,7 @@ $store = $loggedIn ? with_store(function (array &$s) {
 <main class="section-sm">
 <div class="container">
   <div class="admin-head">
-    <p class="brand"><img class="brand-logo" src="/assets/img/logo-dr-schick.svg" width="3675" height="1389" alt="Dr. Schick"><svg class="brand-sub" viewBox="0 0 1000 86" aria-hidden="true" focusable="false"><text x="3" y="70" textLength="994" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="74" font-weight="400" fill="currentColor">MEDICAL AESTHETICS</text></svg></p>
+    <p class="brand"><img class="brand-logo" src="/assets/img/logo-dr-schick.svg" width="3675" height="1389" alt="Dr. Schick"><svg class="brand-sub" viewBox="0 0 1000 78" aria-hidden="true" focusable="false"><defs><linearGradient id="gold-sub-v" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#5e3f1a"/><stop offset=".35" stop-color="#82633d"/><stop offset=".5" stop-color="#a8875a"/><stop offset=".65" stop-color="#82633d"/><stop offset="1" stop-color="#5e3f1a"/></linearGradient></defs><text x="500" y="62" text-anchor="middle" textLength="860" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="64" font-weight="500" fill="url(#gold-sub-v)">MEDICAL AESTHETICS</text></svg></p>
     <?php if ($loggedIn): ?>
       <form method="post" class="inline"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><button class="btn btn-ghost btn-sm" name="do" value="logout">Abmelden</button></form>
     <?php endif; ?>

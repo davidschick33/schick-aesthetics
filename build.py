@@ -282,14 +282,15 @@ def model_img(p, idx, lazy=True):
 
 
 # "Medical Aesthetics" läuft per textLength exakt über die volle Logobreite
-BRAND_SUB = '<svg class="brand-sub" viewBox="0 0 1000 86" aria-hidden="true" focusable="false"><text x="3" y="70" textLength="994" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="74" font-weight="400" fill="currentColor">MEDICAL AESTHETICS</text></svg>'
+def brand_sub(gid="gold-sub"):
+    return ('<svg class="brand-sub" viewBox="0 0 1000 78" aria-hidden="true" focusable="false"><defs><linearGradient id="' + gid + '" x1="0" y1="0" x2="1" y2="0.4"><stop offset="0" stop-color="#5e3f1a"/><stop offset=".35" stop-color="#82633d"/><stop offset=".5" stop-color="#a8875a"/><stop offset=".65" stop-color="#82633d"/><stop offset="1" stop-color="#5e3f1a"/></linearGradient></defs><text x="500" y="62" text-anchor="middle" textLength="860" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="64" font-weight="500" fill="url(#' + gid + ')">MEDICAL AESTHETICS</text></svg>')
 
 
 def brand_html(p, logo="logo-dr-schick.svg"):
     return (
         f'<a class="brand" href="{rel(p, "")}" aria-label="{esc(SITE["brand"])} – zur Startseite">'
         f'<img class="brand-logo" src="{rel(p, "assets/img/" + logo)}" width="3675" height="1389" alt="{SITE["brand_short"]}">'
-        f'{BRAND_SUB}</a>'
+        f'{brand_sub()}</a>'
     )
 
 
@@ -347,9 +348,10 @@ def footer(page):
     return f"""<footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      {brand_html(p, "logo-dr-schick-hell.svg")}
-      <p class="footer-claim">{SITE["claim"]}</p>
-      <p>{SITE["owner"]}<br>{SITE["profession"]}</p>
+      <a class="footer-logo" href="{rel(p, "")}" aria-label="{esc(SITE["brand"])} – zur Startseite">
+        <img src="{rel(p, "assets/img/logo-komplett-hell.svg")}" width="3679" height="2303" loading="lazy"
+             alt="Dr. Schick – Medical Aesthetics – {SITE["claim"]} – {SITE["profession"]}">
+      </a>
     </div>
     <div>
       <h2>Praxis</h2>
@@ -1265,7 +1267,7 @@ def page_forms():
 
 def form_header(title, sub):
     return f"""<div class="no-print btn-row" style="margin-bottom:20px"><button class="btn" type="button" onclick="window.print()">Drucken / als PDF speichern</button></div>
-<p class="brand" style="display:inline-flex"><img class="brand-logo" src="{rel("patientenformulare/x/", "assets/img/logo-dr-schick.svg")}" width="3675" height="1389" alt="{SITE["brand_short"]}">{BRAND_SUB}</p>
+<p class="brand" style="display:inline-flex"><img class="brand-logo" src="{rel("patientenformulare/x/", "assets/img/logo-dr-schick.svg")}" width="3675" height="1389" alt="{SITE["brand_short"]}">{brand_sub("gold-sub-form")}</p>
 <p class="small muted">{SITE["owner"]} · {SITE["practice"]} · {SITE["street"]} · {SITE["zip"]} {SITE["city"]} · {SITE["email"]}</p>
 <h2 style="border:0;margin-top:.6em">{title}</h2><p>{sub}</p>"""
 

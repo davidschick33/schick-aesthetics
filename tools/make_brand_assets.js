@@ -14,16 +14,14 @@ const fonts = `
 @font-face{font-family:J;src:url(${assets}/fonts/jost-latin-400-normal.woff2)}
 @font-face{font-family:JL;src:url(${assets}/fonts/jost-latin-300-normal.woff2)}
 *{margin:0;box-sizing:border-box}
-.bronze{background:linear-gradient(120deg,#7d5640,#c9a68b 45%,#a2765a 70%,#7d5640);-webkit-background-clip:text;background-clip:text;color:transparent}`;
+.bronze{background:linear-gradient(120deg,#5e3f1a,#b39466 45%,#82633d 70%,#5e3f1a);-webkit-background-clip:text;background-clip:text;color:transparent}`;
 
 const icon = (size) => `<style>${fonts} body{width:${size}px;height:${size}px;display:grid;place-items:center;
 background:radial-gradient(circle at 35% 30%,#fff,#eef3f4 60%,#cfdde1)}
 span{font-family:C;font-size:${size * 0.72}px;line-height:1;margin-top:-${size * 0.08}px}</style><span class="bronze">S</span>`;
 
-const logo = `<style>${fonts} body{width:1000px;height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent}
-.logo{width:820px;height:auto;display:block}.s{font-family:J;font-size:30px;letter-spacing:.34em;margin-top:18px;color:#4a3215;padding-left:.34em}
-.c{font-family:J;font-size:20px;letter-spacing:.3em;color:#6a4b25;margin-top:14px}</style>
-<img class="logo" src="${assets}/img/logo-dr-schick.svg"><div class="s">MEDICAL AESTHETICS</div><div class="c">GESUNDHEIT · ÄSTHETIK · PRÄZISION</div>`;
+const logo = `<style>${fonts} body{width:1000px;height:700px;display:flex;align-items:center;justify-content:center;background:transparent}
+img{width:860px;height:auto}</style><img src="${assets}/img/logo-komplett.svg">`;
 
 const og = `<style>${fonts} body{width:1200px;height:630px;position:relative;overflow:hidden;
 background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
@@ -56,7 +54,7 @@ background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
   await shot(icon(180), 180, 180, "apple-touch-icon.png");
   await shot(icon(192), 192, 192, "icon-192.png");
   await shot(icon(512), 512, 512, "icon-512.png");
-  await shot(logo, 1000, 540, "logo.png", { transparent: true });
+  await shot(logo, 1000, 700, "logo.png", { transparent: true });
   await shot(og, 1200, 630, "og-image.jpg");
   await browser.close();
   console.log("ok");
