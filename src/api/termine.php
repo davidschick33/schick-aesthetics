@@ -165,7 +165,7 @@ function send_booking_mails(array $b): bool
         . "Falls Sie den Termin nicht wahrnehmen können, sagen Sie bitte spätestens " . (int) $c['cancel_notice_hours'] . " Stunden vorher ab:\n"
         . "$cancelUrl\n\n"
         . "Ich freue mich auf Sie!\n\n"
-        . "Herzliche Grüße\n{$c['owner']}\n{$c['profession']}\n{$c['address']}\n{$c['email']}\n";
+        . "Herzliche Grüße\n{$c['owner']} – {$c['practice']}\n{$c['profession']}\n{$c['address']}\n{$c['email']}\n";
     $ok2 = send_mail($b['email'], 'Ihre Terminbestätigung: ' . $when, $toPatient, $c['email'], ics_for($b));
     return $ok1 && $ok2;
 }

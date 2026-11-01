@@ -1,4 +1,4 @@
-/* Schick Medical Aesthetics – Online-Terminbuchung mit Kalender
+/* Dr. Schick Medical Aesthetics – Online-Terminbuchung mit Kalender
  * Öffnet sich als Fenster über jeder "Termin buchen"-Schaltfläche und ist auf
  * /termin-buchen/ direkt eingebettet. Daten kommen von api/termine.php. */
 (function () {

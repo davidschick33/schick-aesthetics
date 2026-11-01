@@ -1,4 +1,4 @@
-/* Schick Medical Aesthetics – kleine, abhängigkeitsfreie Interaktionen */
+/* Dr. Schick Medical Aesthetics – kleine, abhängigkeitsfreie Interaktionen */
 (function () {
   "use strict";
   var doc = document.documentElement;

@@ -106,7 +106,7 @@ if ($loggedIn && $isPost) {
                 send_mail($b['email'], 'Absage Ihres Termins am ' . date_de($b['date'], $b['time']),
                     "Guten Tag {$b['name']},\n\nleider muss ich Ihren Termin am " . date_de($b['date'], $b['time']) . " absagen. "
                     . "Bitte buchen Sie gern einen neuen Termin: " . site_url('termin-buchen/') . "\n\nIch bitte um Ihr Verständnis.\n\n"
-                    . "Herzliche Grüße\n{$c['owner']}\n{$c['email']}\n", $c['email']);
+                    . "Herzliche Grüße\n{$c['owner']} – {$c['practice']}\n{$c['email']}\n", $c['email']);
                 $flash .= ' Die Patientin bzw. der Patient wurde per E-Mail informiert.';
             }
         }

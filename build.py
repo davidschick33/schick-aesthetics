@@ -374,7 +374,7 @@ def footer(page):
     </div>
   </div>
   <div class="container footer-bottom">
-    <span>© <span data-year>{date.today().year}</span> {SITE["owner"]} · {SITE["brand"]}</span>
+    <span>© <span data-year>{date.today().year}</span> {SITE["owner"]} – {SITE["practice"]}</span>
     <ul>
       <li><a href="{rel(p, "impressum/")}">Impressum</a></li>
       <li><a href="{rel(p, "datenschutz/")}">Datenschutz</a></li>
@@ -770,7 +770,7 @@ def page_about():
       <p>Seit 25 Jahren bin ich mit Leidenschaft als Zahnärztin tätig. Mein besonderer Schwerpunkt liegt dabei in der ästhetischen Zahnmedizin, Prothetik und Chirurgie. In all diesen Jahren habe ich gelernt, wie eng medizinische Qualität, Ästhetik und das persönliche Wohlbefinden eines Menschen miteinander verbunden sind.</p>
       <p>Ästhetik hat mich dabei schon immer besonders fasziniert. Mich interessiert nicht nur, was man verändern kann, sondern vor allem, wie man Schönheit natürlich, harmonisch und individuell unterstützen kann.</p>
       <p>Aus diesem Interesse heraus habe ich mich entschieden, zusätzlich den Weg als Heilpraktikerin zu gehen. Für mich ist das keine Abkehr von meiner Tätigkeit als Zahnärztin, sondern eine wertvolle Erweiterung meiner bisherigen Arbeit und meiner medizinischen Perspektive.</p>
-      <p>Ich werde auch weiterhin als Zahnärztin tätig sein. Gleichzeitig möchte ich mit der Praxis für Ästhetik einen Raum schaffen, in dem ich meine langjährige medizinische Erfahrung mit meiner Leidenschaft für Ästhetik verbinden kann.</p>
+      <p>Ich werde auch weiterhin als Zahnärztin tätig sein. Gleichzeitig möchte ich mit „Dr. Karina Schick – Medical Aesthetics“ einen Raum schaffen, in dem ich meine langjährige medizinische Erfahrung mit meiner Leidenschaft für Ästhetik verbinden kann.</p>
     </div>
   </div>
 </section>
@@ -1157,8 +1157,8 @@ def page_contact():
 def page_imprint():
     page = {
         "path": "impressum/",
-        "title": "Impressum | Dr. Karina Schick – Praxis für Ästhetik",
-        "description": "Impressum der Website schick-aesthetik.de – Dr. Karina Schick, Praxis für Ästhetik, Schloß Westerburg, 56457 Westerburg.",
+        "title": "Impressum | Dr. Karina Schick – Medical Aesthetics",
+        "description": "Impressum der Website schick-aesthetik.de – Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg, 56457 Westerburg.",
         "crumbs": [("Start", ""), ("Impressum", "impressum/")],
     }
     phone = f"<br>Telefon: {esc(SITE['phone_display'] or SITE['phone'])}" if SITE["phone"] else ""
@@ -1201,7 +1201,7 @@ def page_privacy():
 {page_hero(page, "Rechtliches", "Datenschutzerklärung", "Der Schutz Ihrer persönlichen Daten – insbesondere Ihrer Gesundheitsdaten – ist mir ein besonderes Anliegen.", ctas=False)}
 <section class="section-sm"><div class="container narrow"><div class="glass panel prose">
 <h2>1. Verantwortliche</h2>
-<p>{SITE["owner"]}, {SITE["practice"]}<br>{SITE["street"]}, {SITE["zip"]} {SITE["city"]}<br>E-Mail: <a href="mailto:{SITE["email"]}">{SITE["email"]}</a>{phone}</p>
+<p>{SITE["owner"]} – {SITE["practice"]}<br>{SITE["street"]}, {SITE["zip"]} {SITE["city"]}<br>E-Mail: <a href="mailto:{SITE["email"]}">{SITE["email"]}</a>{phone}</p>
 
 <h2>2. Grundsätzliches</h2>
 <p>Diese Website verwendet keine Tracking- oder Analyse-Tools, keine Social-Media-Plugins und keine eingebetteten Inhalte Dritter. Schriftarten werden lokal von diesem Server geladen; es findet keine Verbindung zu Google Fonts oder anderen Schriftanbietern statt. Cookies werden nur im geschützten Verwaltungsbereich der Praxis gesetzt (technisch notwendiges Sitzungs-Cookie für die Anmeldung), nicht für Besucherinnen und Besucher der Website.</p>
@@ -1418,7 +1418,7 @@ def write_extras(pages):
         f"User-agent: *\nAllow: /\nDisallow: /verwaltung/\nDisallow: /api/\n\nSitemap: {SITE['url']}/sitemap.xml\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     manifest = {
-        "name": SITE["brand"], "short_name": "Schick", "lang": "de", "start_url": "/", "display": "browser",
+        "name": SITE["brand"], "short_name": "Dr. Schick", "lang": "de", "start_url": "/", "display": "browser",
         "background_color": "#f6f4f1", "theme_color": "#f6f4f1",
         "icons": [{"src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png"},
                   {"src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png"}],
@@ -1453,6 +1453,7 @@ def write_booking_config():
         "phone": SITE["phone_display"] or SITE["phone"],
         "brand": SITE["brand"],
         "owner": SITE["owner"],
+        "practice": SITE["practice"],
         "profession": SITE["profession"],
         "address": f"{SITE['street']}, {SITE['zip']} {SITE['city']}",
         "site_url": SITE["url"],

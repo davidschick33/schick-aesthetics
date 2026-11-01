@@ -1,6 +1,6 @@
 <?php
 /**
- * Schick Medical Aesthetics – Online-Terminbuchung (gemeinsame Funktionen)
+ * Dr. Schick Medical Aesthetics – Online-Terminbuchung (gemeinsame Funktionen)
  *
  * Die Einstellungen (Sprechzeiten, E-Mail-Adresse …) kommen aus config.json,
  * die build.py aus content.py erzeugt. Buchungen werden als JSON-Datei
@@ -319,12 +319,12 @@ function ics_for(array $b): string
     $esc = fn(string $s) => addcslashes($s, ",;\\");
     $loc = $b['type'] === 'telefon' ? 'Telefonische Beratung' : $c['address'];
     return implode("\r\n", [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Schick Medical Aesthetics//Termine//DE', 'METHOD:PUBLISH',
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Dr. Schick Medical Aesthetics//Termine//DE', 'METHOD:PUBLISH',
         'BEGIN:VEVENT',
         'UID:' . $b['id'] . '@' . (parse_url((string) $c['site_url'], PHP_URL_HOST) ?: 'schick'),
         'DTSTAMP:' . $fmt(new DateTimeImmutable('now')),
         'DTSTART:' . $fmt($start), 'DTEND:' . $fmt($end),
-        'SUMMARY:' . $esc(type_label($b['type']) . ' – ' . $c['owner']),
+        'SUMMARY:' . $esc(type_label($b['type']) . ' – ' . $c['owner'] . ' – ' . ($c['practice'] ?? 'Medical Aesthetics')),
         'LOCATION:' . $esc($loc),
         'END:VEVENT', 'END:VCALENDAR', '',
     ]);
