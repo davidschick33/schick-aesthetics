@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="76 46 3675 1389" width="3675" height="1389" role="img" aria-label="Dr. Schick">
-<defs><linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="760" y1="14740" x2="37510" y2="-7484"><stop offset="0" stop-color="#7d5640"/><stop offset="0.28" stop-color="#a98263"/><stop offset="0.42" stop-color="#c49f80"/><stop offset="0.5" stop-color="#d6b898"/><stop offset="0.6" stop-color="#b8916f"/><stop offset="0.78" stop-color="#a2765a"/><stop offset="1" stop-color="#7d5640"/></linearGradient></defs>
+<defs><linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="760" y1="14740" x2="37510" y2="-7484"><stop offset="0" stop-color="#442707"/><stop offset="0.22" stop-color="#5e3f1a"/><stop offset="0.4" stop-color="#82633d"/><stop offset="0.5" stop-color="#ad9064"/><stop offset="0.6" stop-color="#82633d"/><stop offset="0.8" stop-color="#5e3f1a"/><stop offset="1" stop-color="#442707"/></linearGradient></defs>
 <g transform="translate(0.000000,1520.000000) scale(0.100000,-0.100000)"
 fill="url(#gold)" stroke="none">
 <path d="M12770 14650 c-72 -20 -125 -29 -168 -28 -59 2 -65 0 -100 -34 -49

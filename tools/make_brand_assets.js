@@ -21,16 +21,16 @@ background:radial-gradient(circle at 35% 30%,#fff,#eef3f4 60%,#cfdde1)}
 span{font-family:C;font-size:${size * 0.72}px;line-height:1;margin-top:-${size * 0.08}px}</style><span class="bronze">S</span>`;
 
 const logo = `<style>${fonts} body{width:1000px;height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:transparent}
-.logo{width:820px;height:auto;display:block}.s{font-family:J;font-size:30px;letter-spacing:.34em;margin-top:18px;color:#26292b;padding-left:.34em}
-.c{font-family:J;font-size:20px;letter-spacing:.3em;color:#a2765a;margin-top:14px}</style>
+.logo{width:820px;height:auto;display:block}.s{font-family:J;font-size:30px;letter-spacing:.34em;margin-top:18px;color:#4a3215;padding-left:.34em}
+.c{font-family:J;font-size:20px;letter-spacing:.3em;color:#6a4b25;margin-top:14px}</style>
 <img class="logo" src="${assets}/img/logo-dr-schick.svg"><div class="s">MEDICAL AESTHETICS</div><div class="c">GESUNDHEIT · ÄSTHETIK · PRÄZISION</div>`;
 
 const og = `<style>${fonts} body{width:1200px;height:630px;position:relative;overflow:hidden;
 background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
 .drops{position:absolute;inset:0;background:url(${assets}/img/drops-hero.webp) right center/auto 120% no-repeat}
 .txt{position:absolute;left:70px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;width:640px}
-.logo{width:500px;height:auto;display:block;margin-left:-6px}.s{font-family:J;font-size:24px;letter-spacing:.34em;color:#26292b;margin-top:14px}
-.c{font-family:J;font-size:17px;letter-spacing:.28em;color:#a2765a;margin-top:12px}
+.logo{width:500px;height:auto;display:block;margin-left:-6px}.s{font-family:J;font-size:24px;letter-spacing:.34em;color:#4a3215;margin-top:14px}
+.c{font-family:J;font-size:17px;letter-spacing:.28em;color:#6a4b25;margin-top:12px}
 .h{font-family:CI;font-size:42px;color:#2f5560;margin-top:40px;line-height:1.15}
 .p{font-family:JL;font-size:24px;color:#545b5f;margin-top:14px}
 .photo{position:absolute;right:70px;top:55px;width:370px;height:520px;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(31,60,70,.6)}

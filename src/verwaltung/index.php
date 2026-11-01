@@ -180,7 +180,7 @@ $store = $loggedIn ? with_store(function (array &$s) {
 <main class="section-sm">
 <div class="container">
   <div class="admin-head">
-    <p class="brand"><img class="brand-logo" src="/assets/img/logo-dr-schick.svg" width="3675" height="1389" alt="Dr. Schick"><span class="brand-sub">Terminverwaltung</span></p>
+    <p class="brand"><img class="brand-logo" src="/assets/img/logo-dr-schick.svg" width="3675" height="1389" alt="Dr. Schick"><svg class="brand-sub" viewBox="0 0 1000 86" aria-hidden="true" focusable="false"><text x="3" y="70" textLength="994" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="74" font-weight="400" fill="currentColor">MEDICAL AESTHETICS</text></svg></p>
     <?php if ($loggedIn): ?>
       <form method="post" class="inline"><input type="hidden" name="csrf" value="<?= h($csrf) ?>"><button class="btn btn-ghost btn-sm" name="do" value="logout">Abmelden</button></form>
     <?php endif; ?>

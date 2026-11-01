@@ -281,11 +281,15 @@ def model_img(p, idx, lazy=True):
             f'<img src="{rel(p, "assets/img/" + name + ".jpg")}" width="{w}" height="{h}" alt="{alt}"{load}></picture>')
 
 
+# "Medical Aesthetics" läuft per textLength exakt über die volle Logobreite
+BRAND_SUB = '<svg class="brand-sub" viewBox="0 0 1000 86" aria-hidden="true" focusable="false"><text x="3" y="70" textLength="994" lengthAdjust="spacing" font-family="Jost, Helvetica Neue, Arial, sans-serif" font-size="74" font-weight="400" fill="currentColor">MEDICAL AESTHETICS</text></svg>'
+
+
 def brand_html(p, logo="logo-dr-schick.svg"):
     return (
         f'<a class="brand" href="{rel(p, "")}" aria-label="{esc(SITE["brand"])} – zur Startseite">'
         f'<img class="brand-logo" src="{rel(p, "assets/img/" + logo)}" width="3675" height="1389" alt="{SITE["brand_short"]}">'
-        f'<span class="brand-sub">Medical Aesthetics</span></a>'
+        f'{BRAND_SUB}</a>'
     )
 
 
@@ -1261,7 +1265,7 @@ def page_forms():
 
 def form_header(title, sub):
     return f"""<div class="no-print btn-row" style="margin-bottom:20px"><button class="btn" type="button" onclick="window.print()">Drucken / als PDF speichern</button></div>
-<p class="brand" style="display:inline-flex"><img class="brand-logo" src="{rel("patientenformulare/x/", "assets/img/logo-dr-schick.svg")}" width="3675" height="1389" alt="{SITE["brand_short"]}"><span class="brand-sub">Medical Aesthetics</span></p>
+<p class="brand" style="display:inline-flex"><img class="brand-logo" src="{rel("patientenformulare/x/", "assets/img/logo-dr-schick.svg")}" width="3675" height="1389" alt="{SITE["brand_short"]}">{BRAND_SUB}</p>
 <p class="small muted">{SITE["owner"]} · {SITE["practice"]} · {SITE["street"]} · {SITE["zip"]} {SITE["city"]} · {SITE["email"]}</p>
 <h2 style="border:0;margin-top:.6em">{title}</h2><p>{sub}</p>"""
 
