@@ -5,12 +5,15 @@
 # sind dadurch von außen nicht erreichbar.
 
 Options -Indexes
-DirectoryIndex index.html
+DirectoryIndex index.html index.php
 ErrorDocument 404 /docs/404.html
 
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
+
+# Alte Adresse -> neue Leistungsseite
+RewriteRule ^leistungen/vampirlifting-prp/?$ /leistungen/homoeopathische-eigenbluttherapie/ [R=301,L]
 
 # Direkte Aufrufe von /docs/... auf die saubere Adresse umleiten
 RewriteCond %{THE_REQUEST} \s/docs/([^\s?]*) [NC]

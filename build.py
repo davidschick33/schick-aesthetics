@@ -15,7 +15,7 @@ import shutil
 from datetime import date
 from pathlib import Path
 
-from content import EXTRA_SERVICES, FAQ, PRICE_INTRO, PRICES, SERVICES, SITE
+from content import BOOKING, EXTRA_SERVICES, FAQ, PRICE_INTRO, PRICES, SERVICES, SITE
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "docs"
@@ -120,7 +120,7 @@ def schema_base():
         "@id": ORG_ID,
         "name": f"{SITE['brand']} – {SITE['owner']}",
         "alternateName": f"{SITE['owner']} – {SITE['practice']}",
-        "description": "Praxis für ästhetische Medizin und Naturheilkunde in Westerburg (Westerwald): Hyaluron, Skinbooster, Biostimulatoren, Microneedling, PRP, Infusionen, Akupunktur und Labordiagnostik.",
+        "description": "Praxis für ästhetische Medizin und Naturheilkunde in Westerburg (Westerwald): Hyaluron, Skinbooster, Biostimulatoren, Microneedling, Infusionen, Akupunktur, homöopathische Eigenbluttherapie und Labordiagnostik.",
         "url": SITE["url"] + "/",
         "email": SITE["email"],
         "image": absurl("assets/img/og-image.jpg"),
@@ -258,6 +258,29 @@ NAV = [
 ]
 
 
+def portrait_caption():
+    notes = [("tooth", "Zahnärztin seit 25 Jahren"), ("award", "Heilpraktikerin"), ("heart", "Mutter von 4 Kindern"), ("lotus", "Ästhetik mit Herz")]
+    lis = "".join(f"<li>{ICONS[i]}<span>{t}</span></li>" for i, t in notes)
+    return f'''<div class="portrait-caption">
+          <p class="portrait-hello"><small>Hallo, ich bin</small><span>Karina</span></p>
+          <ul class="portrait-notes">{lis}</ul>
+        </div>'''
+
+
+MODELS = [
+    ("model-1", 334, 395, "Lächelnde Frau mit Wassertropfen – Symbolbild für natürliche Ausstrahlung"),
+    ("model-2", 337, 400, "Frau mit klarer, gepflegter Haut zwischen Wassertropfen – Symbolbild"),
+    ("model-3", 335, 393, "Fröhliche Frau mit Wassertropfen – Symbolbild für frische Haut"),
+]
+
+
+def model_img(p, idx, lazy=True):
+    name, w, h, alt = MODELS[idx % len(MODELS)]
+    load = ' loading="lazy" decoding="async"' if lazy else ""
+    return (f'<picture><source type="image/webp" srcset="{rel(p, "assets/img/" + name + ".webp")}">'
+            f'<img src="{rel(p, "assets/img/" + name + ".jpg")}" width="{w}" height="{h}" alt="{alt}"{load}></picture>')
+
+
 def brand_html(p):
     return (
         f'<a class="brand" href="{rel(p, "")}" aria-label="{esc(SITE["brand"])} – zur Startseite">'
@@ -378,6 +401,18 @@ def breadcrumb_html(page):
     return f'<nav class="breadcrumb" aria-label="Brotkrumen-Navigation"><ol>{"".join(lis)}</ol></nav>'
 
 
+def booking_scripts(p):
+    if SITE["booking_url"]:
+        return ""
+    cfg = {
+        "email": SITE["email"],
+        "types": BOOKING["types"],
+        "treatments": [["allgemein", "Allgemeine Beratung / noch unsicher"]] + [[s["slug"], s["name"]] for s in SERVICES] + [["laser", "Laserbehandlung"]],
+    }
+    return (f'<script>window.SCHICK_BOOKING={json.dumps(cfg, ensure_ascii=False)};</script>\n'
+            f'<script src="{rel(p, "assets/js/booking.js")}?v={ASSET_VERSION}" defer></script>')
+
+
 def render(page):
     p = page["path"]
     a = lambda x: rel(p, "assets/" + x)
@@ -443,6 +478,7 @@ def render(page):
 {footer(page)}
 {action_bar(page)}
 <script src="{a("js/main.js")}?v={ASSET_VERSION}" defer></script>
+{booking_scripts(p)}
 </body>
 </html>
 """
@@ -451,7 +487,7 @@ def render(page):
 # ---------------------------------------------------------------------------
 # Wiederkehrende Inhaltsbausteine
 # ---------------------------------------------------------------------------
-def page_hero(page, eyebrow, h1, lead, ctas=True, extra=""):
+def page_hero(page, eyebrow, h1, lead, ctas=True, extra="", image=None):
     p = page["path"]
     btns = ""
     if ctas:
@@ -459,14 +495,18 @@ def page_hero(page, eyebrow, h1, lead, ctas=True, extra=""):
       <a class="btn" href="{booking_href(p, "?art=praxis")}">{ICONS["calendar"]} Erstgespräch vereinbaren</a>
       <a class="btn btn-ghost" href="{booking_href(p, "?art=telefon")}">{ICONS["chat"]} Telefonische Beratung</a>
     </div>"""
-    return f"""<section class="page-hero">
+    fig = f'<figure class="hero-model">{model_img(p, image, lazy=False)}</figure>' if image is not None else ""
+    return f"""<section class="page-hero{" has-image" if image is not None else ""}">
   <div class="container">
+    <div class="page-hero-text">
     {breadcrumb_html(page)}
     <p class="eyebrow">{eyebrow}</p>
     <h1>{h1}</h1>
     <p class="lead">{lead}</p>
     {btns}
     {extra}
+    </div>
+    {fig}
   </div>
 </section>"""
 
@@ -544,7 +584,7 @@ def page_home():
     <div>
       <p class="eyebrow">{SITE["profession"]} · {SITE["city"]}</p>
       <h1>Ästhetische Medizin &amp; Naturheilkunde in Westerburg – <span class="serif-i">natürlich schön</span></h1>
-      <p class="lead">Ich bin Dr. Karina Schick – seit 25 Jahren Zahnärztin und heute zusätzlich Heilpraktikerin. In meiner Praxis auf Schloß Westerburg verbinde ich medizinische Präzision mit meiner Leidenschaft für Ästhetik: Ihre natürliche Ausstrahlung sichtbar machen, statt Sie zu verändern.</p>
+      <p class="lead">Ich bin Dr. Karina Schick – seit 25 Jahren Zahnärztin und heute zusätzlich Heilpraktikerin. In der Praxis auf Schloß Westerburg verbinde ich zahnmedizinische Präzision mit meiner Leidenschaft für Ästhetik: Ihre natürliche Ausstrahlung sichtbar machen, statt Sie zu verändern.</p>
       <div class="btn-row">
         <a class="btn" href="{booking_href(p, "?art=praxis")}">{ICONS["calendar"]} Erstgespräch buchen</a>
         <a class="btn btn-ghost" href="{booking_href(p, "?art=telefon")}">{ICONS["chat"]} Telefonische Beratung</a>
@@ -562,12 +602,8 @@ def page_home():
           <source type="image/webp" srcset="assets/img/dr-karina-schick-400.webp 400w, assets/img/dr-karina-schick.webp 600w" sizes="(max-width: 900px) 80vw, 440px">
           <img src="assets/img/dr-karina-schick.jpg" width="600" height="850" alt="Porträt von Dr. Karina Schick, Zahnärztin und Heilpraktikerin in Westerburg" fetchpriority="high">
         </picture>
-        <p class="portrait-hello"><small>Hallo, ich bin</small><span>Karina</span></p>
+        {portrait_caption()}
       </div>
-      <span class="note note-4">{ICONS["tooth"]} Zahnärztin seit 25 Jahren</span>
-      <span class="note note-1">{ICONS["award"]} Heilpraktikerin</span>
-      <span class="note note-2">{ICONS["heart"]} Mutter von 4 Kindern</span>
-      <span class="note note-3">{ICONS["lotus"]} Ästhetik mit Herz</span>
     </div>
   </div>
 </section>
@@ -594,6 +630,26 @@ def page_home():
     <div class="grid grid-3">{aest}</div>
     <h3 class="eyebrow" style="font-size:.8rem;margin-top:48px">Naturheilkunde &amp; Vitalität</h3>
     <div class="grid grid-3">{nat}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container mood">
+    <div class="mood-collage reveal" aria-hidden="false">
+      <figure>{model_img(p, 0)}</figure>
+      <figure>{model_img(p, 1)}</figure>
+      <figure>{model_img(p, 2)}</figure>
+    </div>
+    <div class="glass panel reveal">
+      <p class="eyebrow">Natürliche Ausstrahlung</p>
+      <h2>Frisch, strahlend – und ganz Sie selbst</h2>
+      <p>Gepflegte, gut durchfeuchtete Haut ist die Basis für eine natürliche Ausstrahlung. Mit Skinboostern, Biostimulatoren, Microneedling oder einer sanften Hyaluron-Behandlung unterstütze ich Ihre Haut genau dort, wo Sie es sich wünschen – dezent, harmonisch und ohne Ihre Persönlichkeit zu verändern.</p>
+      <div class="btn-row">
+        <a class="btn" href="{booking_href(p, "?art=praxis")}">{ICONS["calendar"]} Beratung buchen</a>
+        <a class="btn btn-ghost" href="{rel(p, "leistungen/skinbooster-biostimulatoren/")}">Skinbooster &amp; Biostimulatoren</a>
+      </div>
+      <p class="symbol-note">Abbildungen: Symbolbilder mit Models.</p>
+    </div>
   </div>
 </section>
 
@@ -626,7 +682,7 @@ def page_home():
       <h2>So läuft Ihre Behandlung ab</h2>
     </div>
     <ol class="steps">
-      <li class="glass reveal"><h3>Termin buchen</h3><p>Online-Anfrage, E-Mail oder telefonische Erstberatung – ganz wie es Ihnen passt.</p></li>
+      <li class="glass reveal"><h3>Termin buchen</h3><p>Freien Termin im Online-Kalender wählen und direkt buchen – persönlich oder telefonisch.</p></li>
       <li class="glass reveal"><h3>Erstgespräch</h3><p>Ca. 30 Minuten für Anamnese, Ihre Wünsche und eine ehrliche Einschätzung.</p></li>
       <li class="glass reveal"><h3>Ihr Plan</h3><p>Transparente Empfehlung mit Ablauf, Risiken und Kosten – ohne Zeitdruck.</p></li>
       <li class="glass reveal"><h3>Behandlung</h3><p>Präzise, hygienisch und mit hochwertigen Produkten – inklusive Nachsorge.</p></li>
@@ -662,8 +718,8 @@ def page_home():
   <div class="container grid grid-2" style="align-items:center">
     <div class="reveal">
       <p class="eyebrow">Praxis im Westerwald</p>
-      <h2>Ihre Praxis auf Schloß Westerburg</h2>
-      <p>Meine Praxis befindet sich im historischen Schloß Westerburg – gut erreichbar aus Westerburg, Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod und Limburg an der Lahn.</p>
+      <h2>Die Praxis auf Schloß Westerburg</h2>
+      <p>Die Praxis befindet sich im historischen Schloß Westerburg – gut erreichbar aus Westerburg, Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod und Limburg an der Lahn.</p>
       <p><strong>{SITE["hours"]}</strong></p>
     </div>
     <div class="glass panel reveal">
@@ -691,7 +747,7 @@ def page_about():
     }
     p = page["path"]
     page["body"] = f"""
-{page_hero(page, "Über mich", "Dr. Karina Schick – Zahnärztin, Heilpraktikerin, Mutter von 4 Kindern", "Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin. Heute verbinde ich diese Erfahrung mit meiner Begeisterung für Ästhetik und Naturheilkunde – in meiner eigenen Praxis in Westerburg.")}
+{page_hero(page, "Über mich", "Dr. Karina Schick – Zahnärztin, Heilpraktikerin, Mutter von 4 Kindern", "Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin. Heute verbinde ich diese Erfahrung mit meiner Begeisterung für Ästhetik und Naturheilkunde – in der Praxis auf Schloß Westerburg.")}
 <section class="section-sm">
   <div class="container split">
     <div class="portrait reveal" style="margin-inline:0">
@@ -700,7 +756,7 @@ def page_about():
           <source type="image/webp" srcset="{rel(p, "assets/img/dr-karina-schick.webp")}">
           <img src="{rel(p, "assets/img/dr-karina-schick.jpg")}" width="600" height="850" alt="Porträt von Dr. Karina Schick" loading="eager">
         </picture>
-        <p class="portrait-hello"><small>Hallo, ich bin</small><span>Karina</span></p>
+        {portrait_caption()}
       </div>
     </div>
     <div class="glass panel prose reveal">
@@ -708,7 +764,7 @@ def page_about():
       <p>Seit 25 Jahren bin ich mit Leidenschaft als Zahnärztin tätig. Mein besonderer Schwerpunkt liegt dabei in der ästhetischen Zahnmedizin, Prothetik und Chirurgie. In all diesen Jahren habe ich gelernt, wie eng medizinische Qualität, Ästhetik und das persönliche Wohlbefinden eines Menschen miteinander verbunden sind.</p>
       <p>Ästhetik hat mich dabei schon immer besonders fasziniert. Mich interessiert nicht nur, was man verändern kann, sondern vor allem, wie man Schönheit natürlich, harmonisch und individuell unterstützen kann.</p>
       <p>Aus diesem Interesse heraus habe ich mich entschieden, zusätzlich den Weg als Heilpraktikerin zu gehen. Für mich ist das keine Abkehr von meiner Tätigkeit als Zahnärztin, sondern eine wertvolle Erweiterung meiner bisherigen Arbeit und meiner medizinischen Perspektive.</p>
-      <p>Ich werde auch weiterhin als Zahnärztin tätig sein. Gleichzeitig möchte ich mit meiner Praxis für ästhetische Medizin einen Raum schaffen, in dem ich meine langjährige medizinische Erfahrung mit meiner Leidenschaft für Ästhetik verbinden kann.</p>
+      <p>Ich werde auch weiterhin als Zahnärztin tätig sein. Gleichzeitig möchte ich mit der Praxis für Ästhetik einen Raum schaffen, in dem ich meine langjährige medizinische Erfahrung mit meiner Leidenschaft für Ästhetik verbinden kann.</p>
     </div>
   </div>
 </section>
@@ -722,7 +778,7 @@ def page_about():
       <p>Dabei sind mir Natürlichkeit, Harmonie und ein verantwortungsvoller Umgang mit ästhetischen Behandlungen besonders wichtig.</p>
       <h3>Der Blick einer Zahnärztin</h3>
       <p>Meine 25-jährige Erfahrung als Zahnärztin hat meinen Blick für Proportionen, Symmetrie und Ästhetik geprägt. Die Heilpraktik erweitert diesen Blick um weitere Möglichkeiten der ästhetischen Behandlung.</p>
-      <p class="quote">Ich möchte, dass Sie meine Praxis mit einem guten Gefühl verlassen – und vor allem das Gefühl haben, Sie selbst zu sein. Nur vielleicht ein bisschen frischer, strahlender und wohler in Ihrer eigenen Haut.</p>
+      <p class="quote">Ich möchte, dass Sie die Praxis mit einem guten Gefühl verlassen – und vor allem das Gefühl haben, Sie selbst zu sein. Nur vielleicht ein bisschen frischer, strahlender und wohler in Ihrer eigenen Haut.</p>
       <p>Denn für mich bedeutet Ästhetik nicht, einen Menschen zu verändern. Es bedeutet, seine natürliche Schönheit sichtbar zu machen.</p>
       <p class="signature">Ihre Dr. Karina Schick</p>
     </div>
@@ -749,7 +805,7 @@ def page_services():
     page = {
         "path": "leistungen/",
         "title": "Leistungen: Ästhetik & Naturheilkunde | Dr. Karina Schick",
-        "description": "Leistungen in Westerburg: Hyaluron, Skinbooster, Profhilo®, Polynukleotide, Microneedling, PRP, Lipolyse, Infusionen, Akupunktur und Labordiagnostik.",
+        "description": "Leistungen in Westerburg: Hyaluron, Skinbooster, Profhilo®, Polynukleotide, Microneedling, Lipolyse, Infusionen, Eigenbluttherapie und Akupunktur.",
         "crumbs": [("Start", ""), ("Leistungen", "leistungen/")],
         "page_type": "CollectionPage",
     }
@@ -782,6 +838,11 @@ def page_services():
     return page
 
 
+def aest_index(s):
+    aest = [o["slug"] for o in SERVICES if o["group"] == "aesthetik"]
+    return aest.index(s["slug"]) if s["slug"] in aest else None
+
+
 def page_service(s):
     path = f"leistungen/{s['slug']}/"
     page = {
@@ -807,7 +868,7 @@ def page_service(s):
     params = f"?behandlung={s['slug']}"
     phone_line = f'<a class="btn btn-ghost" href="{phone_href()}">{ICONS["phone"]} Anrufen</a>' if SITE["phone"] else f'<a class="btn btn-ghost" href="mailto:{SITE["email"]}">{ICONS["mail"]} E-Mail</a>'
     page["body"] = f"""
-{page_hero(page, group_name, esc(s["h1"]), esc(s["lead"]), ctas=False, extra=f'''<div class="btn-row"><a class="btn" href="{booking_href(p, params + "&art=praxis")}">{ICONS["calendar"]} Beratung zu dieser Behandlung</a><a class="btn btn-ghost" href="#kosten">Kosten ansehen</a></div>''')}
+{page_hero(page, group_name, esc(s["h1"]), esc(s["lead"]), ctas=False, extra=f'''<div class="btn-row"><a class="btn" href="{booking_href(p, params + "&art=praxis")}">{ICONS["calendar"]} Beratung zu dieser Behandlung</a><a class="btn btn-ghost" href="#kosten">Kosten ansehen</a></div>''', image=aest_index(s))}
 <section class="section-sm">
   <div class="container content-layout">
     <article class="glass panel prose">
@@ -874,7 +935,7 @@ def page_prices():
     <div class="grid grid-2" style="margin-top:28px">
       <div class="glass panel reveal">
         <h2>Ohne feste Preisangabe</h2>
-        <p>Für <a href="{rel(p, "leistungen/vampirlifting-prp/")}">Vampirlifting (PRP)</a>, <a href="{rel(p, "leistungen/naturheilverfahren-akupunktur/")}">Naturheilverfahren &amp; Akupunktur</a>, <a href="{rel(p, "leistungen/labordiagnostik/")}">Labordiagnostik</a> und Laserbehandlungen richten sich die Kosten nach Umfang und Aufwand. Sie erhalten vorab eine transparente Kostenaufstellung.</p>
+        <p>Für <a href="{rel(p, "leistungen/homoeopathische-eigenbluttherapie/")}">homöopathische Eigenbluttherapie</a>, <a href="{rel(p, "leistungen/naturheilverfahren-akupunktur/")}">Naturheilverfahren &amp; Akupunktur</a>, <a href="{rel(p, "leistungen/labordiagnostik/")}">Labordiagnostik</a> und Laserbehandlungen richten sich die Kosten nach Umfang und Aufwand. Sie erhalten vorab eine transparente Kostenaufstellung.</p>
       </div>
       <div class="glass panel reveal">
         <h2>Zahlung &amp; Erstattung</h2>
@@ -962,7 +1023,7 @@ def page_faq():
     {faq_html(items, 2)}
   </div>
 </section>
-{cta_band(page, "Noch Fragen?", "Gern beantworte ich Ihre Fragen persönlich – in einer telefonischen Erstberatung oder direkt im Erstgespräch in meiner Praxis.", "?art=telefon")}
+{cta_band(page, "Noch Fragen?", "Gern beantworte ich Ihre Fragen persönlich – in einer telefonischen Erstberatung oder direkt im Erstgespräch in der Praxis.", "?art=telefon")}
 """
     page["schema"] = [faq_schema(items)]
     return page
@@ -972,7 +1033,7 @@ def page_booking():
     page = {
         "path": "termin-buchen/",
         "title": "Termin buchen – Erstgespräch & Beratung | Dr. Karina Schick",
-        "description": "Jetzt Termin anfragen: persönliches Erstgespräch in der Praxis in Westerburg oder telefonische Erstberatung bei Dr. Karina Schick, Zahnärztin & Heilpraktikerin.",
+        "description": "Freie Termine im Online-Kalender sehen und direkt buchen: Erstgespräch in der Praxis in Westerburg oder telefonische Beratung bei Dr. Karina Schick.",
         "crumbs": [("Start", ""), ("Termin buchen", "termin-buchen/")],
     }
     p = page["path"]
@@ -982,13 +1043,19 @@ def page_booking():
         external = f"""<div class="glass panel reveal" style="margin-bottom:24px"><h2>Online-Terminbuchung</h2><p>Wählen Sie Ihren Wunschtermin direkt in meinem Online-Kalender.</p><a class="btn" href="{SITE["booking_url"]}" target="_blank" rel="noopener">{ICONS["calendar"]} Zum Online-Kalender</a></div>"""
     phone_li = f'<li><span class="icon-drop">{ICONS["phone"]}</span><div><strong>Telefon</strong><a href="{phone_href()}">{esc(SITE["phone_display"] or SITE["phone"])}</a></div></li>' if SITE["phone"] else ""
     wa_li = f'<li><span class="icon-drop">{ICONS["whatsapp"]}</span><div><strong>WhatsApp</strong><a href="https://wa.me/{SITE["whatsapp"]}">Nachricht senden</a></div></li>' if SITE["whatsapp"] else ""
+    booking_block = "" if SITE["booking_url"] else (
+        '<div class="glass panel booking-inline" id="booking-widget" aria-live="polite"><p class="bk-loading">Freie Termine werden geladen …</p></div>'
+        '<noscript><style>#terminanfrage{display:grid!important}#booking-widget{display:none}</style></noscript>')
+    hours = "".join(
+        f"<li>{d}: {', '.join(a + '–' + b + ' Uhr' for a, b in r)}</li>" for d, r in BOOKING["hours"].items() if r)
     page["body"] = f"""
-{page_hero(page, "Termin &amp; Beratung", "Termin buchen", "Wählen Sie, ob Sie ein persönliches Erstgespräch in der Praxis oder zunächst eine telefonische Erstberatung wünschen. Ich melde mich schnellstmöglich mit einem Terminvorschlag bei Ihnen.", ctas=False)}
+{page_hero(page, "Termin &amp; Beratung", "Termin buchen", "Im Kalender sehen Sie alle freien Termine. Wählen Sie Ihren Wunschtermin – persönlich in der Praxis oder als telefonische Beratung – und buchen Sie direkt. Die Bestätigung erhalten Sie sofort per E-Mail.", ctas=False)}
 <section class="section-sm">
   <div class="container content-layout">
     <div>
       {external}
-      <form class="glass panel form" id="terminanfrage" data-mail="{SITE["email"]}" action="mailto:{SITE["email"]}" method="post" enctype="text/plain">
+      {booking_block}
+      <form class="glass panel form" id="terminanfrage"{" hidden" if not SITE["booking_url"] else ""} data-mail="{SITE["email"]}" action="mailto:{SITE["email"]}" method="post" enctype="text/plain">
         <h2>Terminanfrage</h2>
         <fieldset>
           <legend>Art des Termins</legend>
@@ -1028,7 +1095,7 @@ def page_booking():
         <ul class="contact-list">
           {phone_li}{wa_li}
           <li><span class="icon-drop">{ICONS["mail"]}</span><div><strong>E-Mail</strong><a href="mailto:{SITE["email"]}">{SITE["email"]}</a></div></li>
-          <li><span class="icon-drop">{ICONS["clock"]}</span><div><strong>Sprechzeiten</strong>{SITE["hours"]}</div></li>
+          <li><span class="icon-drop">{ICONS["clock"]}</span><div><strong>Online buchbare Zeiten</strong><ul class="small" style="margin:4px 0 0">{hours}</ul></div></li>
           <li><span class="icon-drop">{ICONS["pin"]}</span><div><strong>Praxis</strong>{SITE["street"]}, {SITE["zip"]} {SITE["city"]}</div></li>
         </ul>
       </div>
@@ -1048,7 +1115,7 @@ def page_contact():
     page = {
         "path": "kontakt/",
         "title": "Kontakt & Anfahrt – Praxis Schloß Westerburg | Dr. Schick",
-        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Schloß Westerburg, 56457 Westerburg. E-Mail: praxis@schick-aesthetik.de – Termine nach Vereinbarung.",
+        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Schloß Westerburg, 56457 Westerburg. E-Mail: praxis@schick-aesthetics.de – Termine nach Vereinbarung.",
         "crumbs": [("Start", ""), ("Kontakt", "kontakt/")],
         "page_type": "ContactPage",
     }
@@ -1084,8 +1151,8 @@ def page_contact():
 def page_imprint():
     page = {
         "path": "impressum/",
-        "title": "Impressum | Dr. Karina Schick – Praxis für Heilkunde",
-        "description": "Impressum der Website schick-aesthetik.de – Dr. Karina Schick, Praxis für Heilkunde, Schloß Westerburg, 56457 Westerburg.",
+        "title": "Impressum | Dr. Karina Schick – Praxis für Ästhetik",
+        "description": "Impressum der Website schick-aesthetik.de – Dr. Karina Schick, Praxis für Ästhetik, Schloß Westerburg, 56457 Westerburg.",
         "crumbs": [("Start", ""), ("Impressum", "impressum/")],
     }
     phone = f"<br>Telefon: {esc(SITE['phone_display'] or SITE['phone'])}" if SITE["phone"] else ""
@@ -1131,15 +1198,18 @@ def page_privacy():
 <p>{SITE["owner"]}, {SITE["practice"]}<br>{SITE["street"]}, {SITE["zip"]} {SITE["city"]}<br>E-Mail: <a href="mailto:{SITE["email"]}">{SITE["email"]}</a>{phone}</p>
 
 <h2>2. Grundsätzliches</h2>
-<p>Diese Website kommt ohne Cookies, ohne Tracking- oder Analyse-Tools, ohne Social-Media-Plugins und ohne eingebettete Inhalte Dritter aus. Schriftarten werden lokal von diesem Server geladen; es findet keine Verbindung zu Google Fonts oder anderen Schriftanbietern statt.</p>
+<p>Diese Website verwendet keine Tracking- oder Analyse-Tools, keine Social-Media-Plugins und keine eingebetteten Inhalte Dritter. Schriftarten werden lokal von diesem Server geladen; es findet keine Verbindung zu Google Fonts oder anderen Schriftanbietern statt. Cookies werden nur im geschützten Verwaltungsbereich der Praxis gesetzt (technisch notwendiges Sitzungs-Cookie für die Anmeldung), nicht für Besucherinnen und Besucher der Website.</p>
 
 <h2>3. Hosting und Server-Logfiles</h2>
+<p>Diese Website wird bei der Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaca, Zypern, gehostet (Server innerhalb der EU). Mit Hostinger besteht ein Vertrag zur Auftragsverarbeitung gemäß Art. 28 DSGVO.</p>
 <p>Beim Aufruf dieser Website verarbeitet der Hosting-Anbieter automatisch Informationen, die Ihr Browser übermittelt (sog. Server-Logfiles): IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Referrer-URL, Browsertyp und Betriebssystem. Die Verarbeitung erfolgt zur Gewährleistung eines sicheren und stabilen Betriebs der Website auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
-<p>Diese Website wird bei GitHub Pages gehostet, einem Dienst der GitHub B.V., Prins Bernhardplein 200, 1097 JB Amsterdam, Niederlande (Muttergesellschaft: GitHub, Inc., USA). Dabei kann eine Übermittlung von Daten in die USA nicht ausgeschlossen werden. GitHub, Inc. ist unter dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung von GitHub</a>.</p>
 
-<h2>4. Kontaktaufnahme und Terminanfrage</h2>
-<p>Wenn Sie mich per E-Mail oder über das Terminanfrage-Formular kontaktieren, öffnet sich Ihr eigenes E-Mail-Programm; es werden keine Daten über diese Website an einen Server übertragen. Die von Ihnen per E-Mail übermittelten Daten (z. B. Name, E-Mail-Adresse, Telefonnummer, Ihr Anliegen) verarbeite ich zur Bearbeitung Ihrer Anfrage und zur Terminvereinbarung auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen). Soweit Sie Gesundheitsdaten mitteilen, erfolgt die Verarbeitung auf Grundlage von Art. 9 Abs. 2 lit. h DSGVO.</p>
-<p><strong>Hinweis:</strong> Die Kommunikation per E-Mail ist in der Regel unverschlüsselt. Bitte übermitteln Sie keine ausführlichen Gesundheitsdaten per E-Mail; diese besprechen wir persönlich.</p>
+<h2>4. Online-Terminbuchung und Kontaktaufnahme</h2>
+<p>Wenn Sie über den Online-Kalender einen Termin buchen, verarbeite ich die von Ihnen eingegebenen Daten: Name, E-Mail-Adresse, Telefonnummer (optional bzw. bei telefonischer Beratung), gewählter Termin, Art des Termins, Behandlungswunsch und Ihre Nachricht. Die Daten werden auf dem Server des Hosting-Anbieters gespeichert und per E-Mail an die Praxis übermittelt; Sie erhalten eine Bestätigungs-E-Mail mit einem Link zur Online-Absage.</p>
+<p>Zweck ist die Vereinbarung und Organisation Ihres Termins. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen bzw. Behandlungsvertrag). Soweit Ihre Angaben Rückschlüsse auf Ihre Gesundheit zulassen (z. B. der Behandlungswunsch), erfolgt die Verarbeitung auf Grundlage Ihrer Einwilligung nach Art. 9 Abs. 2 lit. a DSGVO, die Sie bei der Buchung erteilen und jederzeit mit Wirkung für die Zukunft widerrufen können.</p>
+<p>Zum Schutz vor Missbrauch wird Ihre IP-Adresse in verschlüsselter (gehashter) Form für 24 Stunden gespeichert, um wiederholte automatisierte Buchungen zu verhindern (Art. 6 Abs. 1 lit. f DSGVO).</p>
+<p>Die Buchungsdaten werden spätestens 90 Tage nach dem Termin automatisch gelöscht, sofern sie nicht in die Behandlungsdokumentation übernommen werden.</p>
+<p>Wenn Sie mich per E-Mail kontaktieren, verarbeite ich Ihre Angaben zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO). <strong>Hinweis:</strong> E-Mails werden in der Regel unverschlüsselt übertragen. Bitte übermitteln Sie keine ausführlichen Gesundheitsdaten per E-Mail oder im Buchungsformular; diese besprechen wir persönlich.</p>
 
 <h2>5. Externe Links</h2>
 <p>Für die Routenplanung wird ein Link zu Google Maps angeboten. Erst wenn Sie diesen Link anklicken, werden Sie zur Website von Google weitergeleitet; ab dann gilt die Datenschutzerklärung von Google. Auf dieser Website selbst wird keine Karte eingebunden.</p>
@@ -1242,7 +1312,7 @@ def page_anamnesis():
 <p>Stillen Sie?</p>{yn}
 <h2>9. Frühere ästhetische Behandlungen</h2>
 <p>Wurden bereits ästhetische Behandlungen durchgeführt?</p>{yn}
-{boxes(["Hyaluronsäure / Filler", "Botulinumtoxin", "PRP / Eigenblut", "Fadenlifting", "Microneedling", "Peeling", "Laser / IPL", "Sonstige"])}
+{boxes(["Hyaluronsäure / Filler", "Botulinumtoxin", "Eigenbluttherapie", "Fadenlifting", "Microneedling", "Peeling", "Laser / IPL", "Sonstige"])}
 {line("Wann und wo wurde zuletzt behandelt?")}{line("Welche Präparate (soweit bekannt)?")}
 <p>Sind aktuell Filler, Implantate oder andere Fremdmaterialien im Behandlungsbereich vorhanden?</p><p>☐ Nein &nbsp; ☐ Ja &nbsp; ☐ Unbekannt</p>{line("Wo?")}
 <h2>10. Weitere wichtige Angaben</h2>
@@ -1339,7 +1409,7 @@ def write_sitemap(pages):
 
 def write_extras(pages):
     (OUT / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\n\nSitemap: {SITE['url']}/sitemap.xml\n", encoding="utf-8")
+        f"User-agent: *\nAllow: /\nDisallow: /verwaltung/\nDisallow: /api/\n\nSitemap: {SITE['url']}/sitemap.xml\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     manifest = {
         "name": SITE["brand"], "short_name": "Schick", "lang": "de", "start_url": "/", "display": "browser",
@@ -1369,6 +1439,22 @@ def write_extras(pages):
         shutil.rmtree(OUT / "404")
 
 
+def write_booking_config():
+    """Einstellungen für die PHP-Terminbuchung (docs/api/lib/config.json, per .htaccess gesperrt)."""
+    cfg = dict(BOOKING)
+    cfg.update({
+        "email": SITE["email"],
+        "phone": SITE["phone_display"] or SITE["phone"],
+        "brand": SITE["brand"],
+        "owner": SITE["owner"],
+        "profession": SITE["profession"],
+        "address": f"{SITE['street']}, {SITE['zip']} {SITE['city']}",
+        "site_url": SITE["url"],
+        "treatments": {"allgemein": "Allgemeine Beratung / noch unsicher", **{s["slug"]: s["name"] for s in SERVICES}, "laser": "Laserbehandlung"},
+    })
+    (OUT / "api" / "lib" / "config.json").write_text(json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def build():
     if OUT.exists():
         cname = (OUT / "CNAME").read_text() if (OUT / "CNAME").exists() else None
@@ -1379,6 +1465,9 @@ def build():
     if cname:
         (OUT / "CNAME").write_text(cname)
     shutil.copytree(SRC / "assets", OUT / "assets")
+    shutil.copytree(SRC / "api", OUT / "api")
+    shutil.copytree(SRC / "verwaltung", OUT / "verwaltung")
+    write_booking_config()
 
     pages = [page_home(), page_about(), page_services()]
     pages += [page_service(s) for s in SERVICES]

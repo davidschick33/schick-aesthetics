@@ -1,0 +1,75 @@
+{
+  "hours": {
+    "Montag": [],
+    "Dienstag": [
+      [
+        "15:00",
+        "19:00"
+      ]
+    ],
+    "Mittwoch": [],
+    "Donnerstag": [
+      [
+        "15:00",
+        "19:00"
+      ]
+    ],
+    "Freitag": [],
+    "Samstag": [
+      [
+        "09:00",
+        "13:00"
+      ]
+    ],
+    "Sonntag": []
+  },
+  "slot_minutes": 30,
+  "weeks_ahead": 10,
+  "min_notice_hours": 24,
+  "cancel_notice_hours": 24,
+  "holidays_rlp": true,
+  "closed_dates": [],
+  "keep_days": 90,
+  "types": [
+    {
+      "id": "praxis",
+      "label": "Erstgespräch in der Praxis",
+      "desc": "ca. 30 Minuten, persönlich in Westerburg"
+    },
+    {
+      "id": "telefon",
+      "label": "Telefonische Beratung",
+      "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an"
+    },
+    {
+      "id": "behandlung",
+      "label": "Behandlungstermin",
+      "desc": "nach bereits erfolgter Beratung"
+    },
+    {
+      "id": "nachsorge",
+      "label": "Kontrolle / Nachsorge",
+      "desc": "für bestehende Patientinnen & Patienten"
+    }
+  ],
+  "email": "praxis@schick-aesthetics.de",
+  "phone": "",
+  "brand": "Schick Medical Aesthetics",
+  "owner": "Dr. Karina Schick",
+  "profession": "Zahnärztin & Heilpraktikerin",
+  "address": "Schloß Westerburg, 56457 Westerburg",
+  "site_url": "https://www.schick-aesthetik.de",
+  "treatments": {
+    "allgemein": "Allgemeine Beratung / noch unsicher",
+    "hyaluron-faltenbehandlung": "Hyaluron-Faltenbehandlung & Lippenunterspritzung",
+    "skinbooster-biostimulatoren": "Skinbooster, Profhilo® & Polynukleotide",
+    "microneedling-mesotherapie": "Microneedling & Mesotherapie",
+    "bio-botox": "„Bio-Botox“ – sanfte Entspannung mimischer Fältchen",
+    "lipolyse": "Lipolyse – „Fett-weg-Spritze“",
+    "infusionstherapie": "Infusionstherapie & Vitamin-Aufbaukuren",
+    "homoeopathische-eigenbluttherapie": "Homöopathische Eigenbluttherapie",
+    "naturheilverfahren-akupunktur": "Naturheilverfahren, Akupunktur & Eigenbluttherapie",
+    "labordiagnostik": "Labordiagnostik & Blutentnahme",
+    "laser": "Laserbehandlung"
+  }
+}

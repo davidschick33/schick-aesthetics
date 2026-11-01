@@ -37,7 +37,7 @@ background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
 .photo img{width:100%;height:100%;object-fit:cover}</style>
 <div class="drops"></div>
 <div class="txt"><div class="n bronze">Schick</div><div class="s">MEDICAL AESTHETICS</div><div class="c">ZAHNÄRZTIN &amp; HEILPRAKTIKERIN</div>
-<div class="h">Natürliche Schönheit,<br>medizinisch präzise.</div><div class="p">Dr. Karina Schick · Schloß Westerburg</div></div>
+<div class="h">Natürliche Schönheit,<br>zahnmedizinisch präzise.</div><div class="p">Dr. Karina Schick · Schloß Westerburg</div></div>
 <div class="photo"><img src="${assets}/img/dr-karina-schick.jpg"></div>`;
 
 (async () => {

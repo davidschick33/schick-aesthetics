@@ -11,10 +11,10 @@ SITE = {
     "brand": "Schick Medical Aesthetics",
     "brand_short": "Schick",
     "owner": "Dr. Karina Schick",
-    "practice": "Praxis für Heilkunde",
+    "practice": "Praxis für Ästhetik",
     "claim": "Präzision · Ästhetik · Gesundheit",
     "profession": "Zahnärztin & Heilpraktikerin",
-    "email": "praxis@schick-aesthetik.de",
+    "email": "praxis@schick-aesthetics.de",
     # Telefonnummer eintragen, sobald vorhanden (z. B. "+49 2663 123456").
     # Solange leer, werden Anruf-Buttons automatisch ausgeblendet.
     "phone": "",
@@ -259,52 +259,11 @@ SERVICES = [
 <li><strong>Nebenwirkungen:</strong> Direkt nach der Behandlung ist die Haut oft gerötet, leicht geschwollen und empfindlich.</li>
 <li><strong>Hygiene:</strong> Ich arbeite ausschließlich mit sterilen Einmal-Nadelmodulen. Von Heimanwendungen mit einfachen Dermarollern rate ich ab, da hier Infektionen und Narben drohen können.</li>
 </ul>
-<p class="info"><strong>Kombinierbar:</strong> Microneedling lässt sich sehr gut mit <a href="{{rel:leistungen/vampirlifting-prp/}}">Eigenblutplasma (PRP)</a> kombinieren.</p>
 """,
         "prices": ["microneedling"],
         "faq": [
             ("Wie viele Sitzungen brauche ich?", "Das hängt von Ihrem Hautbild und Ihrem Ziel ab. Häufig sind 3–4 Sitzungen im Abstand von einigen Wochen sinnvoll. Im Beratungsgespräch erstelle ich Ihnen einen individuellen Plan."),
             ("Wann ist meine Haut wieder „vorzeigbar“?", "Meist ist die Haut 1–3 Tage gerötet, ähnlich einem leichten Sonnenbrand. Make-up sollte erst nach 24 Stunden wieder verwendet werden."),
-        ],
-    },
-    {
-        "slug": "vampirlifting-prp",
-        "group": "aesthetik",
-        "icon": "plasma",
-        "nav": "Vampirlifting (PRP)",
-        "name": "Vampirlifting / PRP-Eigenbluttherapie",
-        "card": "Plättchenreiches Plasma aus Ihrem eigenen Blut – für natürliche Hautregeneration und Kopfhaut.",
-        "tags": ["Eigenblut", "Augenringe", "Kopfhaut"],
-        "title": "Vampirlifting / PRP-Behandlung in Westerburg | Dr. Schick",
-        "description": "Vampirlifting (PRP) in Westerburg: Hautverjüngung mit plättchenreichem Plasma aus dem eigenen Blut – für Gesicht, Hals, Dekolleté, Augenpartie und Kopfhaut.",
-        "h1": "Vampirlifting (PRP) in Westerburg",
-        "lead": "Beim Vampirlifting wird plättchenreiches Plasma (PRP) aus Ihrem eigenen Blut gewonnen und in die Haut eingebracht – eine natürliche Methode ohne Fremdstoffe.",
-        "facts": [("Behandlungsdauer", "ca. 60 Minuten"), ("Blutmenge", "ca. 4–8 ml Eigenblut"), ("Ausfallzeit", "wenige Tage leichte Rötung"), ("Kosten", "nach Beratung")],
-        "service_type": "PRP-Eigenbluttherapie (Vampirlifting)",
-        "body": """
-<h2>Was ist ein Vampirlifting?</h2>
-<p>Das Vampirlifting (PRP-Therapie, „Platelet Rich Plasma“) ist eine minimalinvasive Behandlung zur Hautverjüngung, bei der plättchenreiches Plasma aus dem eigenen Blut in die Haut injiziert oder eingearbeitet wird.</p>
-<h2>Ablauf der Behandlung</h2>
-<ol>
-<li><strong>Blutentnahme:</strong> Ich entnehme eine kleine Menge Eigenblut (ca. 4 bis 8 ml).</li>
-<li><strong>Zentrifugation:</strong> Das Blut wird in einer Zentrifuge getrennt, um das plättchenreiche Plasma mit seinen Wachstumsfaktoren zu gewinnen.</li>
-<li><strong>Anwendung:</strong> Das Plasma wird mit feinen Nadeln direkt in die Haut eingebracht oder mit einem <a href="{{rel:leistungen/microneedling-mesotherapie/}}">Microneedling</a> kombiniert.</li>
-</ol>
-<h2>Vorteile und Wirkprinzip</h2>
-<ul>
-<li><strong>Natürlichkeit:</strong> Es werden keine synthetischen Stoffe verwendet – ausschließlich körpereigenes Material.</li>
-<li><strong>Regeneration:</strong> Die Wachstumsfaktoren sollen ruhende Zellen, die Durchblutung sowie die Bildung von Kollagen und Elastin anregen.</li>
-<li><strong>Vielseitig:</strong> Die Behandlung eignet sich für feine Fältchen im Gesicht, am Hals oder Dekolleté, für Augenringe und zur Stimulation der Haarwurzeln an der Kopfhaut.</li>
-<li><strong>Gesellschaftsfähig:</strong> Nach der Behandlung ist die Haut meist nur für wenige Tage leicht gerötet.</li>
-</ul>
-<h2>Für wen ist PRP geeignet?</h2>
-<p>PRP eignet sich für Menschen, die ihre Hautqualität auf möglichst natürliche Weise verbessern möchten. Da körpereigenes Material verwendet wird, sind allergische Reaktionen sehr unwahrscheinlich. Bei Blutgerinnungsstörungen, bestimmten Blut- oder Tumorerkrankungen, akuten Infektionen sowie in Schwangerschaft und Stillzeit wird nicht behandelt.</p>
-<p class="info"><strong>Hinweis:</strong> Ergebnisse entwickeln sich schrittweise über mehrere Wochen und sind individuell verschieden. Meist sind mehrere Sitzungen sinnvoll.</p>
-""",
-        "prices": [],
-        "faq": [
-            ("Ist das Vampirlifting schmerzhaft?", "Die Blutentnahme entspricht einer normalen Blutabnahme. Für die Behandlung der Haut verwende ich auf Wunsch eine betäubende Creme."),
-            ("Wie viele Behandlungen sind sinnvoll?", "Häufig empfehle ich 2–3 Sitzungen im Abstand von etwa vier Wochen, danach eine Auffrischung nach Bedarf."),
         ],
     },
     {
@@ -425,7 +384,50 @@ SERVICES = [
         "prices": ["infusionen"],
         "faq": [
             ("Warum kommt noch eine Apothekenrechnung hinzu?", "Die Infusionslösung wird individuell für Sie in der Apotheke hergestellt und von der Apotheke direkt abgerechnet. Meine Preise umfassen Beratung, Anlage und Betreuung der Infusion."),
-            ("Brauche ich vorher Laborwerte?", "Nicht immer. Bei bestimmten Fragestellungen oder Kuren ist eine Blutuntersuchung aber sinnvoll, um gezielt zu ergänzen. Die Blutentnahme kann direkt in meiner Praxis erfolgen."),
+            ("Brauche ich vorher Laborwerte?", "Nicht immer. Bei bestimmten Fragestellungen oder Kuren ist eine Blutuntersuchung aber sinnvoll, um gezielt zu ergänzen. Die Blutentnahme kann direkt in der Praxis erfolgen."),
+        ],
+    },
+    {
+        "slug": "homoeopathische-eigenbluttherapie",
+        "group": "naturheilkunde",
+        "icon": "plasma",
+        "nav": "Homöopathische Eigenbluttherapie",
+        "name": "Homöopathische Eigenbluttherapie",
+        "card": "Eine kleine Menge Ihres eigenen Blutes, homöopathisch aufbereitet – zur Anregung der körpereigenen Regulation.",
+        "tags": ["Eigenblut", "Regulation", "Naturheilkunde"],
+        "title": "Homöopathische Eigenbluttherapie Westerburg | Dr. Schick",
+        "description": "Homöopathische Eigenbluttherapie in Westerburg (Westerwald): naturheilkundliches Verfahren mit körpereigenem Blut – ganzheitlich und ehrlich beraten.",
+        "h1": "Homöopathische Eigenbluttherapie in Westerburg",
+        "lead": "Bei der homöopathischen Eigenbluttherapie wird eine kleine Menge Ihres eigenen Blutes nach homöopathischen Regeln aufbereitet und Ihnen zurückgegeben – ein naturheilkundliches Verfahren, das die körpereigenen Regulationskräfte anregen soll.",
+        "facts": [("Behandlungsdauer", "ca. 30 Minuten"), ("Blutmenge", "wenige Tropfen bis ca. 2 ml"), ("Anwendung", "Injektion oder Tropfen"), ("Kosten", "nach Beratung")],
+        "service_type": "Homöopathische Eigenbluttherapie",
+        "body": """
+<h2>Was ist die homöopathische Eigenbluttherapie?</h2>
+<p>Die Eigenbluttherapie gehört zu den traditionellen Verfahren der Naturheilkunde. Bei der homöopathischen Variante wird Ihr Blut nicht unverändert zurückgegeben, sondern zuvor nach den Regeln der Homöopathie verdünnt und verschüttelt („potenziert“). Ziel ist es, dem Körper einen sanften Reiz zu geben und seine Selbstregulation zu unterstützen.</p>
+<h2>Ablauf der Behandlung</h2>
+<ol>
+<li><strong>Anamnese:</strong> Am Anfang steht ein ausführliches Gespräch über Ihr Anliegen, Ihre Vorgeschichte und mögliche Gegenanzeigen.</li>
+<li><strong>Blutentnahme:</strong> Ich entnehme eine kleine Menge Blut aus der Vene oder der Fingerbeere.</li>
+<li><strong>Aufbereitung:</strong> Das Blut wird homöopathisch verdünnt und verschüttelt; je nach Konzept auch mit homöopathischen Einzel- oder Komplexmitteln kombiniert.</li>
+<li><strong>Rückgabe:</strong> Die Zubereitung wird Ihnen in den Muskel oder unter die Haut injiziert oder als Tropfen zum Einnehmen mitgegeben.</li>
+</ol>
+<h2>Wann wird die Eigenbluttherapie eingesetzt?</h2>
+<p>Traditionell wird die homöopathische Eigenbluttherapie begleitend eingesetzt, zum Beispiel:</p>
+<ul>
+<li>zur allgemeinen Anregung der körpereigenen Abwehr, etwa bei Infektanfälligkeit</li>
+<li>in Erholungs- und Regenerationsphasen</li>
+<li>als Teil eines ganzheitlichen Behandlungskonzepts, z. B. ergänzend zu <a href="{{rel:leistungen/infusionstherapie/}}">Infusionen</a> oder <a href="{{rel:leistungen/naturheilverfahren-akupunktur/}}">weiteren naturheilkundlichen Verfahren</a></li>
+</ul>
+<h2>Behandlungsserie</h2>
+<p>Meist wird die Eigenbluttherapie als Serie mit mehreren Behandlungen im Abstand von einigen Tagen bis Wochen durchgeführt. Häufigkeit und Dauer stimmen wir individuell ab.</p>
+<h2>Gegenanzeigen</h2>
+<p>Bei Blutgerinnungsstörungen, der Einnahme gerinnungshemmender Medikamente, akuten schweren Infektionen, bestimmten Blut- oder Tumorerkrankungen sowie in Schwangerschaft und Stillzeit wird nicht oder nur nach sorgfältiger Abwägung behandelt.</p>
+<p class="info"><strong>Pflichthinweis:</strong> Die Homöopathie und die Eigenbluttherapie gehören nicht zu den wissenschaftlich allgemein anerkannten Methoden im Sinne der Schulmedizin. Ihre Wirksamkeit ist wissenschaftlich nicht belegt. Die Behandlung ersetzt keine ärztliche Diagnose oder Therapie.</p>
+""",
+        "prices": [],
+        "faq": [
+            ("Tut die Behandlung weh?", "Die Blutentnahme ist kaum schmerzhafter als ein kleiner Pieks. Bei der Rückgabe als Tropfen entfällt die Injektion ganz."),
+            ("Wie viele Behandlungen sind sinnvoll?", "Das ist individuell. Häufig wird eine Serie von mehreren Behandlungen durchgeführt; den Plan besprechen wir gemeinsam im Erstgespräch."),
         ],
     },
     {
@@ -456,6 +458,7 @@ SERVICES = [
 <p>Als Zahnärztin kenne ich die enge Verbindung zwischen Kiefergelenk, Kaumuskulatur und Verspannungen besonders gut.</p>
 <h2>Eigenbluttherapie</h2>
 <p>Bei der klassischen Eigenbluttherapie wird eine kleine Menge Blut aus der Vene entnommen und – unverändert oder mit naturheilkundlichen Zusätzen – in den Muskel zurückgegeben. Das Verfahren wird traditionell zur Anregung der körpereigenen Regulationskräfte eingesetzt, zum Beispiel begleitend bei Infektanfälligkeit oder in Erholungsphasen.</p>
+<p>Ich biete außerdem die <a href="{{rel:leistungen/homoeopathische-eigenbluttherapie/}}">homöopathische Eigenbluttherapie</a> an, bei der das Blut zuvor homöopathisch aufbereitet wird.</p>
 <h2>Weitere naturheilkundliche Verfahren</h2>
 <p>Je nach Anliegen können weitere Verfahren wie Vitalstoff- und Ernährungsberatung oder <a href="{{rel:leistungen/infusionstherapie/}}">Infusionstherapien</a> sinnvoll sein. Welche Kombination passt, entscheiden wir gemeinsam.</p>
 <p class="info"><strong>Pflichthinweis:</strong> Die hier genannten naturheilkundlichen Verfahren gehören überwiegend nicht zu den wissenschaftlich allgemein anerkannten Methoden im Sinne der Schulmedizin. Ihre Wirksamkeit ist nicht für alle Anwendungsbereiche wissenschaftlich belegt. Sie ersetzen keine ärztliche Diagnose oder Behandlung.</p>
@@ -477,7 +480,7 @@ SERVICES = [
         "title": "Labordiagnostik & Blutentnahme in Westerburg | Dr. Schick",
         "description": "Blutentnahme in Westerburg: Vitamin- und Mineralstoffstatus, Blutbild und weitere Laborwerte als fundierte Grundlage für Ihre Behandlung.",
         "h1": "Labordiagnostik & Blutentnahme in Westerburg",
-        "lead": "Gute Entscheidungen brauchen eine gute Grundlage. Mit einer Blutuntersuchung können wir Ihren Vitalstoffstatus und weitere Werte gezielt überprüfen – die Blutentnahme erfolgt direkt in meiner Praxis.",
+        "lead": "Gute Entscheidungen brauchen eine gute Grundlage. Mit einer Blutuntersuchung können wir Ihren Vitalstoffstatus und weitere Werte gezielt überprüfen – die Blutentnahme erfolgt direkt in der Praxis.",
         "facts": [("Blutentnahme", "wenige Minuten"), ("Ergebnisse", "meist nach wenigen Tagen"), ("Besprechung", "persönlich in der Praxis"), ("Kosten", "je nach Laborprofil")],
         "service_type": "Labordiagnostik",
         "body": """
@@ -493,13 +496,13 @@ SERVICES = [
 <h2>Wie läuft die Blutentnahme ab?</h2>
 <ol>
 <li><strong>Gespräch:</strong> Wir besprechen Ihr Anliegen und legen fest, welche Werte sinnvoll sind. Sie erhalten vorab eine transparente Kosteninformation.</li>
-<li><strong>Blutentnahme:</strong> Die Blutentnahme erfolgt in meiner Praxis – schnell und mit routinierter Hand. Für manche Werte sollten Sie nüchtern kommen; das sage ich Ihnen vorher.</li>
+<li><strong>Blutentnahme:</strong> Die Blutentnahme erfolgt in der Praxis – schnell und mit routinierter Hand. Für manche Werte sollten Sie nüchtern kommen; das sage ich Ihnen vorher.</li>
 <li><strong>Labor:</strong> Die Proben werden von einem externen, spezialisierten Fachlabor ausgewertet.</li>
 <li><strong>Befundbesprechung:</strong> Wir besprechen die Ergebnisse persönlich und leiten gemeinsam die nächsten Schritte ab – z. B. eine gezielte <a href="{{rel:leistungen/infusionstherapie/}}">Infusionstherapie</a>.</li>
 </ol>
 <h2>Was kostet eine Laboruntersuchung?</h2>
 <p>Die Kosten hängen von den gewählten Parametern ab. Die Laborkosten werden nach der Gebührenordnung des Labors berechnet. Vor der Blutentnahme erhalten Sie von mir eine Übersicht über die voraussichtlichen Kosten.</p>
-<p class="info"><strong>Hinweis:</strong> Bei akuten oder unklaren Beschwerden gehört eine Abklärung in ärztliche bzw. fachärztliche Hände. Die Labordiagnostik in meiner Praxis dient vor allem der Planung meiner Behandlungen.</p>
+<p class="info"><strong>Hinweis:</strong> Bei akuten oder unklaren Beschwerden gehört eine Abklärung in ärztliche bzw. fachärztliche Hände. Die Labordiagnostik in der Praxis dient vor allem der Planung meiner Behandlungen.</p>
 """,
         "prices": [],
         "faq": [
@@ -521,12 +524,42 @@ FAQ = [
     ("Wie läuft ein erster Termin ab?", "Beim Ersttermin nehme ich mir Zeit für Ihre Anamnese, Ihre Beschwerden und Ihre Wünsche. Wir besprechen Ziele, mögliche Ursachen und bisherige Befunde und erstellen gemeinsam einen individuellen Behandlungsplan."),
     ("Wie lange dauert ein Termin?", "Ein Ersttermin dauert ca. 30 Minuten, Folgetermine ca. 30–60 Minuten – je nach Behandlung."),
     ("Welche Unterlagen soll ich mitbringen?", "Bitte bringen Sie – falls vorhanden – aktuelle Arztberichte, Laborwerte, eine Medikamentenliste, relevante Befunde (z. B. Blutbild, Schilddrüse, Stuhl- und Darmbefunde) sowie Ihren Impf- und Allergiepass mit. Bei ästhetischen Behandlungen bringen Sie bitte, falls vorhanden, Ihren Injektionspass mit."),
-    ("Wie vereinbare ich einen Termin?", "Am einfachsten über den Button „Termin buchen“. Alternativ erreichen Sie mich per E-Mail{phone_text}."),
+    ("Wie vereinbare ich einen Termin?", "Am einfachsten über den Button „Termin buchen“: Im Kalender sehen Sie alle freien Termine und können direkt buchen. Die Bestätigung erhalten Sie sofort per E-Mail. Alternativ erreichen Sie die Praxis per E-Mail{phone_text}."),
     ("Wie kann ich bezahlen?", "Sie können bar, mit EC-Karte oder per PayPal bezahlen."),
     ("Werden die Kosten von der Krankenkasse erstattet?", "Das ist individuell. Private Krankenversicherungen, Beihilfe oder Zusatzversicherungen erstatten Heilpraktikerleistungen teilweise – abhängig vom Tarif. Gesetzliche Krankenkassen erstatten in der Regel nicht; einzelne Leistungen können je nach Kasse oder Bonusprogramm möglich sein. Bitte klären Sie das direkt mit Ihrer Versicherung. Rein ästhetische Behandlungen sind grundsätzlich Selbstzahlerleistungen."),
     ("Brauche ich eine Überweisung?", "Nein, Sie können auch ohne Überweisung einen Termin vereinbaren."),
-    ("Was passiert, wenn ich einen Termin absagen muss?", "Bitte sagen Sie Termine spätestens 24 Stunden vorher ab, da ansonsten ein Ausfallhonorar anfällt."),
+    ("Was passiert, wenn ich einen Termin absagen muss?", "Bitte sagen Sie Termine spätestens 24 Stunden vorher ab, da ansonsten ein Ausfallhonorar anfällt. Online gebuchte Termine können Sie bequem über den Link in Ihrer Bestätigungs-E-Mail absagen."),
     ("Wer sollte nicht ästhetisch behandelt werden?", "In Schwangerschaft und Stillzeit, bei akuten Infektionen oder Entzündungen im Behandlungsbereich, bei bestimmten Autoimmun- und Gerinnungserkrankungen sowie bei bekannten Allergien gegen Bestandteile der Präparate wird nicht oder nur nach sorgfältiger Abwägung behandelt. Das klären wir gemeinsam anhand des Anamnesebogens."),
     ("Mit welchen Nebenwirkungen muss ich rechnen?", "Nach Injektionsbehandlungen sind leichte Rötungen, Schwellungen, Druckempfindlichkeit oder kleine Blutergüsse möglich, die meist nach wenigen Tagen abklingen. Über seltene Risiken kläre ich Sie vor jeder Behandlung ausführlich und individuell auf."),
     ("Wie bereite ich mich auf eine ästhetische Behandlung vor?", "Verzichten Sie – sofern medizinisch vertretbar und mit Ihrem Arzt abgesprochen – einige Tage vorher möglichst auf blutverdünnende Schmerzmittel und Alkohol, um das Risiko von Blutergüssen zu verringern. Kommen Sie am besten ungeschminkt. Alles Weitere bespreche ich individuell mit Ihnen."),
 ]
+
+# ---------------------------------------------------------------------------
+# Online-Terminbuchung (läuft auf dem Hostinger-Server mit PHP)
+# ---------------------------------------------------------------------------
+BOOKING = {
+    # Sprechzeiten pro Wochentag – in diesen Zeiten können Termine gebucht werden.
+    # Mehrere Zeitfenster pro Tag sind möglich, z. B. [["09:00", "12:00"], ["14:00", "18:00"]]
+    "hours": {
+        "Montag": [],
+        "Dienstag": [["15:00", "19:00"]],
+        "Mittwoch": [],
+        "Donnerstag": [["15:00", "19:00"]],
+        "Freitag": [],
+        "Samstag": [["09:00", "13:00"]],
+        "Sonntag": [],
+    },
+    "slot_minutes": 30,          # Länge eines Termins
+    "weeks_ahead": 10,           # wie weit im Voraus gebucht werden kann
+    "min_notice_hours": 24,      # frühestens so viele Stunden im Voraus buchbar
+    "cancel_notice_hours": 24,   # Online-Absage durch Patienten bis so viele Stunden vorher
+    "holidays_rlp": True,        # gesetzliche Feiertage in Rheinland-Pfalz automatisch sperren
+    "closed_dates": [],          # z. B. Urlaub: ["2026-12-24", "2026-12-31"]
+    "keep_days": 90,             # vergangene Termine werden nach so vielen Tagen gelöscht
+    "types": [
+        {"id": "praxis", "label": "Erstgespräch in der Praxis", "desc": "ca. 30 Minuten, persönlich in Westerburg"},
+        {"id": "telefon", "label": "Telefonische Beratung", "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an"},
+        {"id": "behandlung", "label": "Behandlungstermin", "desc": "nach bereits erfolgter Beratung"},
+        {"id": "nachsorge", "label": "Kontrolle / Nachsorge", "desc": "für bestehende Patientinnen & Patienten"},
+    ],
+}
