@@ -75,7 +75,7 @@ Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-
 5. **Fortbildungen und Zertifikate** auf „Über mich“ ergänzen. Das schafft Vertrauen.
 6. **Preise**: Profhilo® „Hände 550 €“ wurde als eigene Position übernommen. Bitte prüfen.
 7. **Laserbehandlung**: Es gibt noch keine Detailseite, weil die Informationen fehlen.
-8. **Sprechzeiten für die Online-Buchung**: Aktuell sind Platzhalter eingetragen (Di + Do 15–19 Uhr, Sa 9–13 Uhr). Bitte die echten Zeiten in `content.py` → `BOOKING` eintragen.
+8. **Sprechzeiten für die Online-Buchung**: Dienstag 8–14 Uhr und Samstag 11–14 Uhr (änderbar in `content.py` → `BOOKING`).
 9. **Model-Fotos**: Bitte sicherstellen, dass ihr die Nutzungsrechte an den drei Model-Bildern habt, z. B. eine Lizenz der Bildagentur oder des Herstellers.
 10. **Homöopathische Eigenbluttherapie**: Der Text ist neu und allgemein formuliert. Bitte fachlich gegenlesen.
 11. **Domain**: Die E-Mail lautet jetzt `praxis@schick-aesthetics.com`. Wenn auch die Website unter `schick-aesthetics.com` läuft, muss `url` in `content.py` angepasst werden. Davon hängen Canonical-Links, Sitemap und Schema-Daten ab.

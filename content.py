@@ -542,11 +542,11 @@ BOOKING = {
     # Mehrere Zeitfenster pro Tag sind möglich, z. B. [["09:00", "12:00"], ["14:00", "18:00"]]
     "hours": {
         "Montag": [],
-        "Dienstag": [["15:00", "19:00"]],
+        "Dienstag": [["08:00", "14:00"]],
         "Mittwoch": [],
-        "Donnerstag": [["15:00", "19:00"]],
+        "Donnerstag": [],
         "Freitag": [],
-        "Samstag": [["09:00", "13:00"]],
+        "Samstag": [["11:00", "14:00"]],
         "Sonntag": [],
     },
     "slot_minutes": 30,          # Länge eines Termins
