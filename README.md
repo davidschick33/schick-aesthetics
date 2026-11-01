@@ -73,7 +73,9 @@ Im Ordner `flyer/` liegt ein Flyer (DIN A5, Vorder- und Rückseite, ohne Preise)
 - `Flyer-Dr-Schick-A5-Druck-3mm-Beschnitt.pdf`: für die Druckerei (154 × 216 mm inkl. 3 mm Beschnitt)
 - Der QR-Code führt direkt zur Online-Terminbuchung.
 
-Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_flyer.js`.
+- `Flyer-Dr-Schick-Handy.pdf` sowie `Flyer-Vorderseite.jpg` / `Flyer-Rueckseite.jpg`: zum Anschauen auf dem Handy und zum Teilen (z. B. WhatsApp)
+
+Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_flyer.js && python3 flyer/make_handy_pdf.py`.
 
 ## Bitte vor dem Livegang prüfen ⚠️
 

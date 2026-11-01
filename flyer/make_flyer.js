@@ -28,6 +28,14 @@ const url = (q) => "file://" + path.join(dir, "flyer.html") + q;
   await pages[0].screenshot({ path: path.join(dir, "Vorschau-Vorderseite.png") });
   await pages[1].screenshot({ path: path.join(dir, "Vorschau-Rueckseite.png") });
 
+  // Handy-/Teilen-Version: hochauflösende Bilder (JPG) – werden zu einem einfachen Bild-PDF zusammengefügt
+  const hi = await browser.newPage({ viewport: { width: 560, height: 794 }, deviceScaleFactor: 3 });
+  await hi.goto(url(""), { waitUntil: "networkidle" });
+  await hi.evaluate(() => document.fonts.ready);
+  const hp = await hi.$$(".page");
+  await hp[0].screenshot({ path: path.join(dir, "Flyer-Vorderseite.jpg"), type: "jpeg", quality: 88 });
+  await hp[1].screenshot({ path: path.join(dir, "Flyer-Rueckseite.jpg"), type: "jpeg", quality: 88 });
+
   await browser.close();
   console.log("ok");
 })();
