@@ -196,6 +196,11 @@ def webpage_schema(page, page_type="WebPage"):
     }
     if page.get("crumbs"):
         d["breadcrumb"] = {"@id": absurl(page["path"]) + "#breadcrumb"}
+    if page_type == "ProfilePage":
+        # Google verlangt bei Profilseiten die Person als Hauptinhalt
+        d["mainEntity"] = {"@id": PERSON_ID}
+    if page_type == "CollectionPage":
+        d["mainEntity"] = {"@id": absurl(page["path"]) + "#leistungen"}
     return d
 
 
@@ -835,6 +840,7 @@ def page_services():
 """
     page["schema"] = [{
         "@type": "ItemList",
+        "@id": absurl(page["path"]) + "#leistungen",
         "name": "Leistungen",
         "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "url": absurl(f"leistungen/{s['slug']}/"), "name": s["name"]}
