@@ -12,7 +12,8 @@ import html
 import json
 import re
 import shutil
-from datetime import date
+from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from content import BOOKING, EXTRA_SERVICES, FAQ, PRICE_INTRO, PRICES, SERVICES, SITE
@@ -21,6 +22,8 @@ ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "docs"
 SRC = ROOT / "src"
 TODAY = date.today().isoformat()
+# Vollständiger Zeitstempel mit Zeitzone (ISO 8601), wie Google ihn für dateModified erwartet
+NOW_ISO = datetime.now(ZoneInfo("Europe/Berlin")).replace(microsecond=0).isoformat()
 ASSET_VERSION = TODAY.replace("-", "")
 
 esc = html.escape
@@ -192,7 +195,7 @@ def webpage_schema(page, page_type="WebPage"):
         "inLanguage": "de-DE",
         "isPartOf": {"@id": WEBSITE_ID},
         "about": {"@id": ORG_ID},
-        "dateModified": TODAY,
+        "dateModified": NOW_ISO,
     }
     if page.get("crumbs"):
         d["breadcrumb"] = {"@id": absurl(page["path"]) + "#breadcrumb"}
