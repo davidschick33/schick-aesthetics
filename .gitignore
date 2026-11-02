@@ -4,3 +4,4 @@ __pycache__/
 node_modules/
 .termine-daten/
 schick-termine-daten/
+smtp.json

@@ -340,7 +340,97 @@ function ics_for(array $b): string
     ]);
 }
 
-/** Versendet eine Text-E-Mail (UTF-8), optional mit Kalenderdatei. */
+/**
+ * SMTP-Zugangsdaten (optional) aus <Datenordner>/smtp.json, z. B.:
+ *   {"host": "smtp.hostinger.com", "port": 465, "secure": "ssl",
+ *    "user": "praxis@schick-aesthetics.com", "pass": "PASSWORT"}
+ * Die Datei liegt außerhalb von public_html und nicht auf GitHub.
+ * Ohne diese Datei wird PHP mail() verwendet.
+ */
+function smtp_cfg(): ?array
+{
+    static $smtp = false;
+    if ($smtp === false) {
+        $smtp = null;
+        try {
+            $file = data_dir() . '/smtp.json';
+            if (is_file($file)) {
+                $data = json_decode((string) file_get_contents($file), true);
+                if (is_array($data) && !empty($data['pass'])) {
+                    $smtp = $data + [
+                        'host' => 'smtp.hostinger.com',
+                        'port' => 465,
+                        'secure' => 'ssl',
+                        'user' => cfg()['email'],
+                    ];
+                }
+            }
+        } catch (Throwable $e) {
+            $smtp = null;
+        }
+    }
+    return $smtp;
+}
+
+/** Versendet eine fertig aufgebaute Nachricht per SMTP (AUTH LOGIN). */
+function smtp_send(array $smtp, string $from, string $to, string $data): bool
+{
+    $secure = strtolower((string) $smtp['secure']);
+    $remote = ($secure === 'ssl' ? 'ssl://' : 'tcp://') . $smtp['host'] . ':' . (int) $smtp['port'];
+    $ctx = stream_context_create(['ssl' => ['verify_peer' => true, 'verify_peer_name' => true]]);
+    $fp = @stream_socket_client($remote, $errno, $errstr, 15, STREAM_CLIENT_CONNECT, $ctx);
+    if (!$fp) {
+        error_log("Schick-Termine SMTP: Verbindung fehlgeschlagen ($errno $errstr)");
+        return false;
+    }
+    stream_set_timeout($fp, 15);
+    $read = function () use ($fp): string {
+        $out = '';
+        while (($line = fgets($fp, 1024)) !== false) {
+            $out .= $line;
+            if (strlen($line) < 4 || $line[3] === ' ') {
+                break;
+            }
+        }
+        return $out;
+    };
+    $cmd = function (string $c, array $ok) use ($fp, $read): bool {
+        if ($c !== '') {
+            fwrite($fp, $c . "\r\n");
+        }
+        $resp = $read();
+        if (!in_array((int) substr($resp, 0, 3), $ok, true)) {
+            $shown = strlen($c) > 200 ? '[Nachricht]' : (stripos($c, 'AUTH') === 0 || preg_match('/^[A-Za-z0-9+\/=]+$/', $c) ? '[Anmeldung]' : $c);
+            error_log('Schick-Termine SMTP: ' . $shown . ' -> ' . trim($resp));
+            return false;
+        }
+        return true;
+    };
+    $host = parse_url((string) (cfg()['site_url'] ?? ''), PHP_URL_HOST) ?: 'localhost';
+    $ok = $cmd('', [220]) && $cmd("EHLO $host", [250]);
+    if ($ok && $secure === 'tls') {
+        $ok = $cmd('STARTTLS', [220])
+            && stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)
+            && $cmd("EHLO $host", [250]);
+    }
+    $ok = $ok
+        && $cmd('AUTH LOGIN', [334])
+        && $cmd(base64_encode((string) $smtp['user']), [334])
+        && $cmd(base64_encode((string) $smtp['pass']), [235])
+        && $cmd("MAIL FROM:<$from>", [250])
+        && $cmd("RCPT TO:<$to>", [250, 251])
+        && $cmd('DATA', [354]);
+    if ($ok) {
+        // Punkt am Zeilenanfang verdoppeln (SMTP-Regel)
+        $body = preg_replace('/^\./m', '..', str_replace(["\r\n", "\r"], "\n", $data));
+        $ok = $cmd(str_replace("\n", "\r\n", $body) . "\r\n.", [250]);
+    }
+    @fwrite($fp, "QUIT\r\n");
+    fclose($fp);
+    return $ok;
+}
+
+/** Versendet eine Text-E-Mail (UTF-8), optional mit Kalenderdatei – per SMTP, sonst mit mail(). */
 function send_mail(string $to, string $subject, string $body, string $replyTo = '', ?string $ics = null): bool
 {
     $c = cfg();
@@ -368,6 +458,21 @@ function send_mail(string $to, string $subject, string $body, string $replyTo = 
             . "--$boundary--\r\n";
     }
     $subj = mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n");
+
+    $smtp = smtp_cfg();
+    if ($smtp) {
+        $domain = substr(strrchr($from, '@') ?: '@localhost', 1);
+        $data = implode("\r\n", array_merge([
+            'Date: ' . date('r'),
+            'Message-ID: <' . bin2hex(random_bytes(12)) . '@' . $domain . '>',
+            "To: <$to>",
+            "Subject: $subj",
+        ], $headers)) . "\r\n\r\n" . $message;
+        if (smtp_send($smtp, $from, $to, $data)) {
+            return true;
+        }
+        error_log('Schick-Termine: SMTP-Versand fehlgeschlagen, versuche mail()');
+    }
     return @mail($to, $subj, $message, implode("\r\n", $headers), '-f' . $from);
 }
 

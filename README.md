@@ -32,6 +32,14 @@ Eine schnelle, statische Website ohne Baukasten, ohne Cookies und ohne Tracking.
 
 **Daten:** Die Buchungen werden im Ordner `schick-termine-daten` **neben** `public_html` gespeichert. Sie sind dort nicht über das Internet abrufbar und werden bei einem neuen Deploy nicht gelöscht. Vergangene Termine werden nach 90 Tagen automatisch entfernt.
 
+**E-Mail-Versand per SMTP (empfohlen):** Damit Buchungs-E-Mails zuverlässig ankommen, auch an die eigene Praxis-Adresse, versendet die Website über das Postfach praxis@schick-aesthetics.com. Dazu im Hostinger-Dateimanager im Ordner `schick-termine-daten` (neben `public_html`) eine Datei `smtp.json` anlegen:
+
+```json
+{"host": "smtp.hostinger.com", "port": 465, "secure": "ssl", "user": "praxis@schick-aesthetics.com", "pass": "PASSWORT-DES-POSTFACHS"}
+```
+
+Das Passwort steht nur in dieser Datei auf dem Server, nicht auf GitHub. Ohne die Datei wird PHP `mail()` verwendet. Schlägt SMTP fehl, wird automatisch auf `mail()` zurückgegriffen.
+
 **Schutz:**
 - Doppelbuchungen sind ausgeschlossen.
 - Spam-Schutz greift über ein unsichtbares Feld und eine Zeitprüfung.
