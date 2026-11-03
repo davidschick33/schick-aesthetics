@@ -18,6 +18,7 @@ $action = $_GET['action'] ?? 'slots';
 
 try {
     if ($action === 'slots') {
+        maybe_send_reminders();
         $av = with_store(fn(array &$store) => availability($store), false);
         $c = cfg();
         json_out(['ok' => true, 'slot_minutes' => $c['slot_minutes'], 'types' => $c['types']] + $av);

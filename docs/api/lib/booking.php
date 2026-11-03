@@ -39,6 +39,10 @@ function data_dir(): string
         $candidates[] = rtrim((string) getenv('SCHICK_DATA_DIR'), '/');
     }
     $docroot = rtrim((string) ($_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
+    if ($docroot === '') {
+        // Aufruf über Cron/Kommandozeile: public_html = drei Ebenen über api/lib
+        $docroot = dirname(__DIR__, 3);
+    }
     if ($docroot !== '') {
         $candidates[] = dirname($docroot) . '/schick-termine-daten';
     }
@@ -310,6 +314,10 @@ function h(?string $s): string
 
 function site_url(string $path = ''): string
 {
+    if (empty($_SERVER['HTTP_HOST'])) {
+        // Cron/Kommandozeile: Adresse aus der Konfiguration
+        return rtrim((string) cfg()['site_url'], '/') . '/' . ltrim($path, '/');
+    }
     $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
     $host = $_SERVER['HTTP_HOST'] ?? parse_url((string) (cfg()['site_url'] ?? ''), PHP_URL_HOST);
     return ($https ? 'https' : 'http') . '://' . $host . '/' . ltrim($path, '/');
@@ -474,6 +482,86 @@ function send_mail(string $to, string $subject, string $body, string $replyTo = 
         error_log('Schick-Termine: SMTP-Versand fehlgeschlagen, versuche mail()');
     }
     return @mail($to, $subj, $message, implode("\r\n", $headers), '-f' . $from);
+}
+
+/* ------------------------------------------------------------------------
+ * Terminerinnerung
+ * --------------------------------------------------------------------- */
+
+/**
+ * Verschickt Erinnerungs-E-Mails für Termine, die in den nächsten
+ * reminder_hours Stunden beginnen. Jeder Termin wird nur einmal erinnert.
+ * Gibt die Anzahl der versendeten Erinnerungen zurück.
+ */
+function send_due_reminders(): int
+{
+    $c = cfg();
+    $hours = (int) ($c['reminder_hours'] ?? 24);
+    if ($hours <= 0) {
+        return 0;
+    }
+    $now = new DateTimeImmutable('now');
+    $due = with_store(function (array &$store) use ($now, $hours) {
+        $list = [];
+        foreach ($store['bookings'] as &$b) {
+            if (($b['status'] ?? '') !== 'gebucht' || !empty($b['reminded'])) {
+                continue;
+            }
+            $start = new DateTimeImmutable($b['date'] . ' ' . $b['time']);
+            // fällig: weniger als $hours Stunden bis zum Termin, aber noch mindestens 1 Stunde
+            if ($start > $now->modify('+1 hour') && $start <= $now->modify("+{$hours} hours")) {
+                $b['reminded'] = date('c');
+                $list[] = $b;
+            }
+        }
+        return $list;
+    });
+    $sent = 0;
+    foreach ($due as $b) {
+        $when = date_de($b['date'], $b['time']);
+        $where = $b['type'] === 'telefon'
+            ? "Ich rufe Sie zum vereinbarten Zeitpunkt unter {$b['phone']} an."
+            : "Adresse: {$c['address']}";
+        $text = "Guten Tag {$b['name']},\n\n"
+            . "ich möchte Sie an Ihren Termin erinnern:\n\n"
+            . "Termin:      $when\n"
+            . 'Art:         ' . type_label($b['type']) . "\n\n"
+            . "$where\n\n"
+            . "Bitte bringen Sie – falls vorhanden – aktuelle Befunde, eine Medikamentenliste und bei ästhetischen Behandlungen Ihren Injektionspass mit. "
+            . "Den Anamnesebogen können Sie vorab ausfüllen: " . site_url('patientenformulare/anamnesebogen/') . "\n\n"
+            . "Falls Sie den Termin nicht wahrnehmen können, geben Sie mir bitte so schnell wie möglich per E-Mail Bescheid.\n\n"
+            . "Ich freue mich auf Sie!\n\n"
+            . "Herzliche Grüße\n{$c['owner']} – {$c['practice']}\n{$c['profession']}\n{$c['address']}\n{$c['email']}\n";
+        if (send_mail($b['email'], 'Erinnerung an Ihren Termin: ' . $when, $text, $c['email'], ics_for($b))) {
+            $sent++;
+        } else {
+            // Versand fehlgeschlagen: beim nächsten Durchlauf erneut versuchen
+            $id = $b['id'];
+            with_store(function (array &$store) use ($id) {
+                foreach ($store['bookings'] as &$x) {
+                    if ($x['id'] === $id) {
+                        unset($x['reminded']);
+                    }
+                }
+            });
+        }
+    }
+    return $sent;
+}
+
+/** Rückfall ohne Cron: höchstens alle 15 Minuten beim Aufruf der Website prüfen. */
+function maybe_send_reminders(): void
+{
+    try {
+        $flag = data_dir() . '/reminder.last';
+        if (is_file($flag) && filemtime($flag) > time() - 900) {
+            return;
+        }
+        @touch($flag);
+        send_due_reminders();
+    } catch (Throwable $e) {
+        error_log('Schick-Termine Erinnerung: ' . $e->getMessage());
+    }
 }
 
 function json_out(array $data, int $code = 200): void

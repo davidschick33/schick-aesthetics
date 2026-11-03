@@ -32,6 +32,9 @@ SITE = {
     "country": "DE",
     "maps_url": "https://www.google.com/maps/search/?api=1&query=Schlo%C3%9F+Westerburg%2C+56457+Westerburg",
     "hours": "Termine nach Vereinbarung",
+    # Google-Bewertungslink ("Rezensionen einholen" im Unternehmensprofil). Leer = Google-Suche nach der Praxis.
+    # Der QR-Code auf der Bewertungskarte zeigt auf /bewertung/ und leitet hierhin weiter.
+    "review_url": "",
     "payment": ["Bar", "EC-Karte", "PayPal"],
     "area_served": ["Westerburg", "Westerwaldkreis", "Montabaur", "Hachenburg", "Bad Marienberg", "Rennerod", "Limburg an der Lahn", "Wallmerod"],
     "authority": "Kreisverwaltung des Westerwaldkreises – Gesundheitsamt, Peter-Altmeier-Platz 1, 56410 Montabaur",
@@ -558,6 +561,7 @@ BOOKING = {
     "weeks_ahead": 10,           # wie weit im Voraus gebucht werden kann
     "min_notice_hours": 24,      # frühestens so viele Stunden im Voraus buchbar
     "cancel_notice_hours": 24,   # Online-Absage durch Patienten bis so viele Stunden vorher
+    "reminder_hours": 24,        # Erinnerungs-E-Mail so viele Stunden vor dem Termin (0 = aus)
     "holidays_rlp": True,        # gesetzliche Feiertage in Rheinland-Pfalz automatisch sperren
     "closed_dates": [],          # z. B. Urlaub: ["2026-12-24", "2026-12-31"]
     "keep_days": 90,             # vergangene Termine werden nach so vielen Tagen gelöscht

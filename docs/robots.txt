@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /verwaltung/
 Disallow: /api/
+Disallow: /bewertung/
+Disallow: /email-signatur/
 
 Sitemap: https://www.schick-aesthetics.com/sitemap.xml

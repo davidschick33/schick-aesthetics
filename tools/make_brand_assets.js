@@ -56,6 +56,9 @@ background:linear-gradient(160deg,#f7f6f3,#e6eef0 55%,#dfe9eb)}
   await shot(icon(512), 512, 512, "icon-512.png");
   await shot(logo, 1000, 700, "logo.png", { transparent: true });
   await shot(og, 1200, 630, "og-image.jpg");
+  // Logo für die E-Mail-Signatur (PNG, doppelte Auflösung für scharfe Darstellung)
+  const sig = `<style>body{width:340px;height:128px;margin:0;background:transparent}img{width:340px;height:128px;display:block}</style><img src="${assets}/img/logo-dr-schick.svg">`;
+  await shot(sig, 340, 128, "signatur-logo.png", { transparent: true });
   await browser.close();
   console.log("ok");
 })();

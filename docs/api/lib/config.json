@@ -28,6 +28,7 @@
   "weeks_ahead": 10,
   "min_notice_hours": 24,
   "cancel_notice_hours": 24,
+  "reminder_hours": 24,
   "holidays_rlp": true,
   "closed_dates": [],
   "keep_days": 90,

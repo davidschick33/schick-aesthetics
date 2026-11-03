@@ -1425,9 +1425,58 @@ def write_sitemap(pages):
     (OUT / "sitemap.xml").write_text(xml, encoding="utf-8")
 
 
+def write_redirect_pages():
+    """/bewertung/ leitet zum Google-Bewertungslink weiter (QR-Code auf der Bewertungskarte)."""
+    target = SITE.get("review_url") or "https://www.google.com/search?q=" + "Dr.+Schick+Medical+Aesthetics+Westerburg"
+    t = esc(target, quote=True)
+    page = f"""<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>Bewertung | {esc(SITE["brand"])}</title>
+<meta http-equiv="refresh" content="0; url={t}"><script>location.replace({json.dumps(target)});</script></head>
+<body style="font-family:sans-serif;text-align:center;padding:40px">
+<p>Sie werden zu Google weitergeleitet … <a href="{t}">Hier klicken, falls nicht.</a></p>
+<p>Vielen Dank für Ihre Bewertung! – {esc(SITE["brand"])}</p></body></html>
+"""
+    (OUT / "bewertung").mkdir(parents=True, exist_ok=True)
+    (OUT / "bewertung" / "index.html").write_text(page, encoding="utf-8")
+
+
+def write_signature_page():
+    """/email-signatur/: fertige E-Mail-Signatur zum Kopieren (nicht in der Sitemap)."""
+    u = SITE["url"]
+    sig = f"""<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;color:#26292b;font-size:13px;line-height:1.5">
+<tr><td style="padding:0 0 10px 0"><a href="{u}/" style="text-decoration:none"><img src="{u}/assets/img/signatur-logo.png" width="170" height="64" alt="Dr. Schick Medical Aesthetics" style="display:block;border:0"></a></td></tr>
+<tr><td style="border-top:1px solid #d9c7ad;padding-top:10px">
+<strong style="font-size:15px;color:#5e3f1a">{SITE["owner"]}</strong><br>
+<span style="color:#545b5f">{SITE["profession"]}</span><br>
+<span style="color:#545b5f">{SITE["owner"]} – {SITE["practice"]}</span><br>
+<span style="color:#545b5f">{SITE["street"]} · {SITE["zip"]} {SITE["city"]}</span><br>
+<a href="mailto:{SITE["email"]}" style="color:#82633d;text-decoration:none">{SITE["email"]}</a> · <a href="{u}/" style="color:#82633d;text-decoration:none">www.schick-aesthetics.com</a>
+</td></tr>
+<tr><td style="padding-top:12px"><a href="{u}/termin-buchen/" style="display:inline-block;background:#82633d;color:#ffffff;text-decoration:none;padding:8px 16px;border-radius:18px;font-size:12px;letter-spacing:1px">TERMIN ONLINE BUCHEN</a></td></tr>
+<tr><td style="padding-top:12px;font-size:10px;color:#8a8f92">Bitte senden Sie keine ausführlichen Gesundheitsdaten per E-Mail – diese besprechen wir persönlich.</td></tr>
+</table>"""
+    page = f"""<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><title>E-Mail-Signatur | {esc(SITE["brand"])}</title>
+<style>body{{font-family:Arial,sans-serif;background:#f6f4f1;color:#26292b;margin:0;padding:24px}}.box{{background:#fff;border-radius:14px;padding:24px;max-width:620px;margin:0 auto 20px}}
+h1{{font-size:20px;margin:0 0 8px}}ol{{padding-left:20px;line-height:1.6}}button{{background:#82633d;color:#fff;border:0;border-radius:20px;padding:10px 18px;font-size:14px;cursor:pointer}}</style></head>
+<body><div class="box"><h1>E-Mail-Signatur</h1><ol>
+<li>Auf <b>„Signatur kopieren“</b> tippen (oder die Signatur unten markieren und kopieren).</li>
+<li>Im Webmail: <b>Einstellungen → Signatur</b> öffnen.</li><li>Einfügen und <b>Speichern</b>.</li></ol>
+<button onclick="copySig()">Signatur kopieren</button> <span id="ok"></span></div>
+<div class="box" id="sig">{sig}</div>
+<script>function copySig(){{var r=document.createRange();r.selectNode(document.getElementById('sig'));var s=getSelection();s.removeAllRanges();s.addRange(r);
+try{{document.execCommand('copy');document.getElementById('ok').textContent='Kopiert ✓';}}catch(e){{document.getElementById('ok').textContent='Bitte manuell kopieren';}}}}</script>
+</body></html>
+"""
+    (OUT / "email-signatur").mkdir(parents=True, exist_ok=True)
+    (OUT / "email-signatur" / "index.html").write_text(page, encoding="utf-8")
+
+
 def write_extras(pages):
     (OUT / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\nDisallow: /verwaltung/\nDisallow: /api/\n\nSitemap: {SITE['url']}/sitemap.xml\n", encoding="utf-8")
+        f"User-agent: *\nAllow: /\nDisallow: /verwaltung/\nDisallow: /api/\nDisallow: /bewertung/\nDisallow: /email-signatur/\n\nSitemap: {SITE['url']}/sitemap.xml\n", encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     manifest = {
         "name": SITE["brand"], "short_name": "Dr. Schick", "lang": "de", "start_url": "/", "display": "browser",
@@ -1500,6 +1549,8 @@ def build():
         target.write_text(render(pg), encoding="utf-8")
     write_sitemap(pages)
     write_extras(pages)
+    write_redirect_pages()
+    write_signature_page()
     print(f"{len(pages)} Seiten erzeugt in {OUT}")
     for pg in pages:
         print(f"  /{pg['path']:<50} {len(pg['title']):>3} Z. Titel | {len(pg['description']):>3} Z. Beschreibung")

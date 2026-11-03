@@ -74,6 +74,27 @@ Für die eigene Domain eine Datei `docs/CNAME` mit dem Inhalt `www.schick-aesthe
 
 Danach die Sitemap in der **Google Search Console** einreichen und ein **Google-Unternehmensprofil** anlegen. Das ist wichtig für die lokale Suche.
 
+## Terminerinnerung
+
+Patienten bekommen automatisch 24 Stunden vor ihrem Termin eine Erinnerungs-E-Mail (einstellbar in `content.py` → `BOOKING["reminder_hours"]`, 0 = aus). In der Verwaltung steht beim Termin „Erinnerung gesendet“.
+
+Zuverlässig wird das mit einem **Cron-Job** bei Hostinger (hPanel → Erweitert → Cron-Jobs), stündlich:
+- Typ **PHP**, Datei: `public_html/docs/api/erinnerung.php` (Pfad wie im Dateimanager)
+
+Ohne Cron-Job prüft die Website zusätzlich bei jedem Aufruf des Kalenders bzw. der Verwaltung (höchstens alle 15 Minuten).
+
+## E-Mail-Signatur
+
+Unter `/email-signatur/` (nicht in Google) liegt die fertige Signatur zum Kopieren für das Webmail (Einstellungen → Signatur).
+
+## Bewertungskarte
+
+Im Ordner `bewertungskarte/` (Visitenkartenformat 85 × 55 mm, Druck-PDF mit 3 mm Beschnitt). Der QR-Code zeigt auf `/bewertung/`, das zu Google weiterleitet. Sobald der Google-Bewertungslink vorliegt, in `content.py` bei `review_url` eintragen – die gedruckten Karten bleiben gültig.
+
+## Social Media
+
+`social-media/10-Beitraege.md` bzw. `10-Social-Media-Beitraege.pdf`: zehn fertige, HWG-konforme Beiträge.
+
 ## Flyer
 
 Im Ordner `flyer/` liegt ein Flyer (DIN A5, Vorder- und Rückseite, ohne Preise):
