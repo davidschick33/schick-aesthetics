@@ -34,7 +34,7 @@ SITE = {
     "hours": "Termine nach Vereinbarung",
     # Google-Bewertungslink ("Rezensionen einholen" im Unternehmensprofil). Leer = Google-Suche nach der Praxis.
     # Der QR-Code auf der Bewertungskarte zeigt auf /bewertung/ und leitet hierhin weiter.
-    "review_url": "",
+    "review_url": "https://g.page/r/CevTs7BgVLaOEBI/review",
     "payment": ["Bar", "EC-Karte", "PayPal"],
     "area_served": ["Westerburg", "Westerwaldkreis", "Montabaur", "Hachenburg", "Bad Marienberg", "Rennerod", "Limburg an der Lahn", "Wallmerod"],
     "authority": "Kreisverwaltung des Westerwaldkreises – Gesundheitsamt, Peter-Altmeier-Platz 1, 56410 Montabaur",
