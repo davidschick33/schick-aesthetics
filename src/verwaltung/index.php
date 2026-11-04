@@ -229,7 +229,7 @@ $store = $loggedIn ? with_store(function (array &$s) {
       <table class="admin-table"><thead><tr><th>Uhrzeit</th><th>Patient/in</th><th>Termin</th><th>Nachricht</th><th></th></tr></thead><tbody>
             <?php endif; ?>
         <tr>
-          <td><strong><?= h($b['time']) ?> Uhr</strong><br><?php if ($b['status'] !== 'gebucht'): ?><span class="tag off">abgesagt</span><?php elseif (!empty($b['reminded'])): ?><span class="tag">Erinnerung gesendet</span><?php endif; ?></td>
+          <td><strong><?= h($b['time']) ?>–<?= h(booking_end($b)) ?> Uhr</strong><br><?php if ($b['status'] !== 'gebucht'): ?><span class="tag off">abgesagt</span><?php elseif (!empty($b['reminded'])): ?><span class="tag">Erinnerung gesendet</span><?php endif; ?></td>
           <td><?= h($b['name']) ?><br><a href="mailto:<?= h($b['email']) ?>"><?= h($b['email']) ?></a><?php if ($b['phone']): ?><br><a href="tel:<?= h(preg_replace('/[^\d+]/', '', $b['phone'])) ?>"><?= h($b['phone']) ?></a><?php endif; ?></td>
           <td><?= h(type_label($b['type'])) ?><br><span class="muted small"><?= h(treatment_label($b['treatment'])) ?></span></td>
           <td class="small"><?= nl2br(h($b['message'] ?: '–')) ?></td>

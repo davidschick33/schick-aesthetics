@@ -30,14 +30,20 @@
   function parse(s) { var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
   function longDate(s) { var d = parse(s); return WD_LONG[d.getDay()] + ", " + d.getDate() + ". " + MONTHS[d.getMonth()] + " " + d.getFullYear(); }
 
-  var cache = null;
-  function load(force) {
-    if (cache && !force) return cache;
-    cache = fetch(API + "?action=slots", { headers: { Accept: "application/json" }, cache: "no-store" })
+  // Freie Zeiten hängen von der Termindauer ab (Terminart bzw. Behandlung) – je Kombination zwischenspeichern
+  var cache = {};
+  function load(force, type, treatment) {
+    type = type || "praxis";
+    treatment = type === "behandlung" ? (treatment || "allgemein") : "";
+    var key = type + "|" + treatment;
+    if (force) cache = {};
+    if (cache[key]) return cache[key];
+    cache[key] = fetch(API + "?action=slots&type=" + encodeURIComponent(type) + "&treatment=" + encodeURIComponent(treatment),
+      { headers: { Accept: "application/json" }, cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (d) { if (!d.ok) throw new Error("API"); return d; })
-      .catch(function (e) { cache = null; throw e; });
-    return cache;
+      .catch(function (e) { delete cache[key]; throw e; });
+    return cache[key];
   }
 
   /* ---------------- Widget ---------------- */
@@ -52,7 +58,7 @@
     var self = this;
     this.root.innerHTML = "";
     this.root.appendChild(el("div", { class: "bk-loading", text: "Freie Termine werden geladen …" }));
-    load(this.opts.force).then(function (data) {
+    load(this.opts.force, this.state.type, this.state.treatment).then(function (data) {
       self.opts.force = false;
       self.data = data;
       if (!self.state.month) {
@@ -80,15 +86,17 @@
     var types = el("div", { class: "bk-types", role: "radiogroup", "aria-label": "Art des Termins" });
     (data.types || CFG.types).forEach(function (t) {
       var b = el("button", { type: "button", class: "bk-type" + (st.type === t.id ? " is-active" : ""), role: "radio", "aria-checked": st.type === t.id ? "true" : "false",
-        onclick: function () { st.type = t.id; self.step1(); } }, [el("strong", { text: t.label }), el("small", { text: t.desc })]);
+        onclick: function () { if (st.type === t.id) return; st.type = t.id; st.time = null; self.render(); } }, [el("strong", { text: t.label }), el("small", { text: t.desc })]);
       types.appendChild(b);
     });
     r.appendChild(types);
 
     // Behandlung
-    var sel = el("select", { id: "bk-treat-" + this.uid(), class: "bk-select", onchange: function () { st.treatment = this.value; } });
+    var sel = el("select", { id: "bk-treat-" + this.uid(), class: "bk-select", onchange: function () { st.treatment = this.value; if (st.type === "behandlung") { st.time = null; self.render(); } } });
     CFG.treatments.forEach(function (t) { sel.appendChild(el("option", { value: t[0], text: t[1], selected: st.treatment === t[0] })); });
     r.appendChild(el("div", { class: "bk-field" }, [el("label", { for: sel.id, text: "Ich interessiere mich für" }), sel]));
+
+    if (data.minutes) r.appendChild(el("p", { class: "bk-duration", text: "Dauer des Termins: ca. " + data.minutes + " Minuten" }));
 
     // Kalender
     var m = st.month, y = m.getFullYear(), mo = m.getMonth();
@@ -153,7 +161,7 @@
     var typeLabel = (this.data.types.filter(function (t) { return t.id === st.type; })[0] || {}).label || "";
     r.appendChild(el("div", { class: "bk-summary" }, [
       el("strong", { text: longDate(st.date) + " · " + st.time + " Uhr" }),
-      el("span", { text: typeLabel }),
+      el("span", { text: typeLabel + (this.data.minutes ? " · ca. " + this.data.minutes + " Min." : "") }),
       el("button", { type: "button", class: "bk-link", text: "ändern", onclick: function () { self.step1(); } })
     ]));
     var f = el("form", { class: "form bk-form", novalidate: true });
@@ -185,7 +193,7 @@
           message: st.message, consent: consent.checked, website: f.elements.website.value, elapsed: Date.now() - st.opened })
       }).then(function (res) { return res.json().catch(function () { return { ok: false, error: "Technischer Fehler." }; }); })
         .then(function (d) {
-          if (d.ok) { load(true); self.step3(d); return; }
+          if (d.ok) { cache = {}; self.step3(d); return; }
           err.textContent = d.error || "Die Buchung ist fehlgeschlagen."; err.hidden = false;
           submit.disabled = false; submit.textContent = "Termin verbindlich buchen";
           if (d.refresh) { st.time = null; self.opts.force = true; setTimeout(function () { self.render(); }, 2500); }
@@ -260,7 +268,7 @@
       var p = paramsOf(a.getAttribute("href"));
       inline._widget.state.type = p.get("art") || inline._widget.state.type;
       inline._widget.state.treatment = p.get("behandlung") || inline._widget.state.treatment;
-      inline._widget.step1 && inline._widget.data ? inline._widget.step1() : inline._widget.render();
+      inline._widget.state.time = null; inline._widget.render();
       inline.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }

@@ -165,8 +165,8 @@ function is_closed_date(string $date): bool
     return false;
 }
 
-/** Alle regulären Startzeiten eines Tages laut Sprechzeiten. */
-function day_times(string $date): array
+/** Sprechzeiten eines Tages als Zeitfenster [Beginn, Ende] (leer = keine Sprechzeit). */
+function day_ranges(string $date): array
 {
     $c = cfg();
     $dt = new DateTimeImmutable($date);
@@ -182,35 +182,67 @@ function day_times(string $date): array
             return [];
         }
     }
-    $step = max(5, (int) ($c['slot_minutes'] ?? 30));
     $out = [];
     foreach ($ranges as $r) {
-        [$from, $to] = $r;
-        $t = new DateTimeImmutable("$date $from");
-        $end = new DateTimeImmutable("$date $to");
-        while ($t->modify("+{$step} minutes") <= $end) {
-            $out[] = $t->format('H:i');
-            $t = $t->modify("+{$step} minutes");
-        }
+        $out[] = [new DateTimeImmutable("$date {$r[0]}"), new DateTimeImmutable("$date {$r[1]}")];
     }
-    sort($out);
-    return array_values(array_unique($out));
+    return $out;
 }
 
-function is_blocked(array $store, string $date, string $time): bool
+function slot_minutes(): int
 {
-    foreach ($store['blocks'] as $b) {
-        if (($b['date'] ?? '') !== $date) {
-            continue;
-        }
-        if (empty($b['from'])) {
-            return true; // ganzer Tag
-        }
-        if ($time >= $b['from'] && $time < $b['to']) {
-            return true;
+    return max(5, (int) (cfg()['slot_minutes'] ?? 30));
+}
+
+/** Dauer eines Termins in Minuten: je Terminart, bei Behandlungen je Behandlung. */
+function duration_for(string $type, string $treatment = ''): int
+{
+    $c = cfg();
+    if ($type === 'behandlung') {
+        $m = $c['treatment_minutes'][$treatment] ?? ($c['default_treatment_minutes'] ?? 60);
+    } else {
+        $m = slot_minutes();
+        foreach ($c['types'] ?? [] as $t) {
+            if ($t['id'] === $type && !empty($t['minutes'])) {
+                $m = $t['minutes'];
+            }
         }
     }
-    return false;
+    return max(slot_minutes(), (int) $m);
+}
+
+function booking_minutes(array $b): int
+{
+    return max(5, (int) ($b['duration'] ?? slot_minutes()));
+}
+
+/** Prüft, ob der Zeitraum [start, end) frei ist (keine Buchung, keine Sperre). */
+function is_range_free(array $store, string $date, DateTimeImmutable $start, DateTimeImmutable $end): bool
+{
+    foreach ($store['bookings'] as $b) {
+        if ($b['date'] !== $date || ($b['status'] ?? 'gebucht') !== 'gebucht') {
+            continue;
+        }
+        $bs = new DateTimeImmutable($b['date'] . ' ' . $b['time']);
+        $be = $bs->modify('+' . booking_minutes($b) . ' minutes');
+        if ($bs < $end && $start < $be) {
+            return false;
+        }
+    }
+    foreach ($store['blocks'] as $bl) {
+        if (($bl['date'] ?? '') !== $date) {
+            continue;
+        }
+        if (empty($bl['from'])) {
+            return false; // ganzer Tag gesperrt
+        }
+        $bs = new DateTimeImmutable("$date {$bl['from']}");
+        $be = new DateTimeImmutable("$date {$bl['to']}");
+        if ($bs < $end && $start < $be) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function is_day_blocked(array $store, string $date): bool
@@ -223,20 +255,16 @@ function is_day_blocked(array $store, string $date): bool
     return false;
 }
 
-function is_booked(array $store, string $date, string $time): bool
-{
-    foreach ($store['bookings'] as $b) {
-        if ($b['date'] === $date && $b['time'] === $time && ($b['status'] ?? 'gebucht') === 'gebucht') {
-            return true;
-        }
-    }
-    return false;
-}
-
-/** Kalenderdaten für die Website: Tage mit Status und Zeiten (frei / belegt). */
-function availability(array $store): array
+/**
+ * Kalenderdaten für die Website: Tage mit Status und Startzeiten (frei / belegt).
+ * Bei längeren Terminen wird nur angeboten, was komplett in die Sprechzeit passt
+ * und über die ganze Dauer frei ist.
+ */
+function availability(array $store, ?int $minutes = null): array
 {
     $c = cfg();
+    $minutes = $minutes ?: slot_minutes();
+    $step = slot_minutes();
     $now = new DateTimeImmutable('now');
     $earliest = $now->modify('+' . (int) ($c['min_notice_hours'] ?? 24) . ' hours');
     $start = new DateTimeImmutable('today');
@@ -246,12 +274,14 @@ function availability(array $store): array
         $date = $d->format('Y-m-d');
         $slots = [];
         if (!is_closed_date($date) && !is_day_blocked($store, $date)) {
-            foreach (day_times($date) as $t) {
-                if (new DateTimeImmutable("$date $t") < $earliest) {
-                    continue;
+            foreach (day_ranges($date) as [$from, $to]) {
+                for ($t = $from; $t->modify("+{$minutes} minutes") <= $to; $t = $t->modify("+{$step} minutes")) {
+                    if ($t < $earliest) {
+                        continue;
+                    }
+                    $free = is_range_free($store, $date, $t, $t->modify("+{$minutes} minutes"));
+                    $slots[] = ['t' => $t->format('H:i'), 'free' => $free];
                 }
-                $taken = is_booked($store, $date, $t) || is_blocked($store, $date, $t);
-                $slots[] = ['t' => $t, 'free' => !$taken];
             }
         }
         if (!$slots) {
@@ -261,18 +291,24 @@ function availability(array $store): array
         }
         $days[$date] = ['status' => $status, 'slots' => $slots];
     }
-    return ['from' => $start->format('Y-m-d'), 'to' => $end->format('Y-m-d'), 'days' => $days];
+    return ['from' => $start->format('Y-m-d'), 'to' => $end->format('Y-m-d'), 'days' => $days, 'minutes' => $minutes];
 }
 
-function is_slot_bookable(array $store, string $date, string $time): bool
+function is_slot_bookable(array $store, string $date, string $time, ?int $minutes = null): bool
 {
-    $av = availability($store);
+    $av = availability($store, $minutes);
     foreach ($av['days'][$date]['slots'] ?? [] as $s) {
         if ($s['t'] === $time) {
             return $s['free'];
         }
     }
     return false;
+}
+
+/** Endzeit eines Termins als "HH:MM". */
+function booking_end(array $b): string
+{
+    return (new DateTimeImmutable($b['date'] . ' ' . $b['time']))->modify('+' . booking_minutes($b) . ' minutes')->format('H:i');
 }
 
 /* ------------------------------------------------------------------------
@@ -331,7 +367,7 @@ function ics_for(array $b): string
 {
     $c = cfg();
     $start = new DateTimeImmutable($b['date'] . ' ' . $b['time'], new DateTimeZone('Europe/Berlin'));
-    $end = $start->modify('+' . (int) ($c['slot_minutes'] ?? 30) . ' minutes');
+    $end = $start->modify('+' . booking_minutes($b) . ' minutes');
     $utc = new DateTimeZone('UTC');
     $fmt = fn(DateTimeImmutable $d) => $d->setTimezone($utc)->format('Ymd\THis\Z');
     $esc = fn(string $s) => addcslashes($s, ",;\\");
@@ -524,7 +560,7 @@ function send_due_reminders(): int
             : "Adresse: {$c['address']}";
         $text = "Guten Tag {$b['name']},\n\n"
             . "ich möchte Sie an Ihren Termin erinnern:\n\n"
-            . "Termin:      $when\n"
+            . "Termin:      $when (bis " . booking_end($b) . " Uhr)\n"
             . 'Art:         ' . type_label($b['type']) . "\n\n"
             . "$where\n\n"
             . "Bitte bringen Sie – falls vorhanden – aktuelle Befunde, eine Medikamentenliste und bei ästhetischen Behandlungen Ihren Injektionspass mit. "

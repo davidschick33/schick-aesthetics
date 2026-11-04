@@ -28,6 +28,8 @@ Eine schnelle, statische Website ohne Baukasten, ohne Cookies und ohne Tracking.
 - Alle kommenden Termine ansehen und absagen (optional mit E-Mail an den Patienten).
 - Tage oder Zeiten sperren, z. B. für Urlaub oder Termine, die telefonisch vergeben wurden. Gesperrte Zeiten erscheinen im Kalender als belegt.
 
+**Termindauer:** Erstgespräch, telefonische Beratung und Kontrolle dauern 30 Minuten. Bei Behandlungsterminen richtet sich die Dauer nach der Behandlung (`content.py` → `BOOKING["treatment_minutes"]`, z. B. Hyaluron 60, Skinbooster 45). Der Kalender bietet dann nur Uhrzeiten an, an denen die ganze Dauer frei ist und die Behandlung vor Ende der Sprechzeit fertig wird.
+
 **Sprechzeiten** (wann online gebucht werden kann) stehen in `content.py` unter `BOOKING`. Ebenso dort: Terminlänge, wie weit im Voraus gebucht werden kann, Urlaubstage und die Feiertage in Rheinland-Pfalz (werden automatisch gesperrt).
 
 **Daten:** Die Buchungen werden im Ordner `schick-termine-daten` **neben** `public_html` gespeichert. Sie sind dort nicht über das Internet abrufbar und werden bei einem neuen Deploy nicht gelöscht. Vergangene Termine werden nach 90 Tagen automatisch entfernt.

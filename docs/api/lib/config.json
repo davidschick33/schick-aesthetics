@@ -36,24 +36,42 @@
     {
       "id": "praxis",
       "label": "Erstgespräch in der Praxis",
-      "desc": "ca. 30 Minuten, persönlich in Westerburg"
+      "desc": "ca. 30 Minuten, persönlich in Westerburg",
+      "minutes": 30
     },
     {
       "id": "telefon",
       "label": "Telefonische Beratung",
-      "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an"
+      "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an",
+      "minutes": 30
     },
     {
       "id": "behandlung",
       "label": "Behandlungstermin",
-      "desc": "nach bereits erfolgter Beratung"
+      "desc": "nach bereits erfolgter Beratung",
+      "minutes": 60
     },
     {
       "id": "nachsorge",
       "label": "Kontrolle / Nachsorge",
-      "desc": "für bestehende Patientinnen & Patienten"
+      "desc": "für bestehende Patientinnen & Patienten",
+      "minutes": 30
     }
   ],
+  "treatment_minutes": {
+    "hyaluron-faltenbehandlung": 60,
+    "skinbooster-biostimulatoren": 45,
+    "microneedling-mesotherapie": 60,
+    "lipolyse": 45,
+    "bio-botox": 30,
+    "infusionstherapie": 60,
+    "homoeopathische-eigenbluttherapie": 30,
+    "naturheilverfahren-akupunktur": 60,
+    "labordiagnostik": 30,
+    "laser": 60,
+    "allgemein": 60
+  },
+  "default_treatment_minutes": 60,
   "email": "praxis@schick-aesthetics.com",
   "phone": "",
   "brand": "Dr. Schick Medical Aesthetics",

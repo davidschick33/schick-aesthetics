@@ -590,3 +590,4 @@ html.bk-open { overflow: hidden; }
 .bk-check { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; font-size: 2rem; color: #fff; background: linear-gradient(135deg, var(--bronze-light), var(--bronze-dark)); margin-bottom: 12px; }
 .bk-done-date { font-family: var(--serif); font-size: 1.6rem; color: var(--teal); margin-bottom: 8px; }
 .booking-inline { min-height: 420px; }
+.bk-duration { margin: -4px 0 14px; font-size: 0.9rem; color: var(--teal); }

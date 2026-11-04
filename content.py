@@ -557,7 +557,7 @@ BOOKING = {
     "rhythm": {
         "Samstag": {"weeks": 3, "start": "2026-11-21"},
     },
-    "slot_minutes": 30,          # Länge eines Termins
+    "slot_minutes": 30,          # Zeitraster des Kalenders (Termine beginnen zur vollen/halben Stunde)
     "weeks_ahead": 10,           # wie weit im Voraus gebucht werden kann
     "min_notice_hours": 24,      # frühestens so viele Stunden im Voraus buchbar
     "cancel_notice_hours": 24,   # Online-Absage durch Patienten bis so viele Stunden vorher
@@ -566,9 +566,25 @@ BOOKING = {
     "closed_dates": [],          # z. B. Urlaub: ["2026-12-24", "2026-12-31"]
     "keep_days": 90,             # vergangene Termine werden nach so vielen Tagen gelöscht
     "types": [
-        {"id": "praxis", "label": "Erstgespräch in der Praxis", "desc": "ca. 30 Minuten, persönlich in Westerburg"},
-        {"id": "telefon", "label": "Telefonische Beratung", "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an"},
-        {"id": "behandlung", "label": "Behandlungstermin", "desc": "nach bereits erfolgter Beratung"},
-        {"id": "nachsorge", "label": "Kontrolle / Nachsorge", "desc": "für bestehende Patientinnen & Patienten"},
+        {"id": "praxis", "label": "Erstgespräch in der Praxis", "desc": "ca. 30 Minuten, persönlich in Westerburg", "minutes": 30},
+        {"id": "telefon", "label": "Telefonische Beratung", "desc": "Ich rufe Sie zum gebuchten Zeitpunkt an", "minutes": 30},
+        {"id": "behandlung", "label": "Behandlungstermin", "desc": "nach bereits erfolgter Beratung", "minutes": 60},
+        {"id": "nachsorge", "label": "Kontrolle / Nachsorge", "desc": "für bestehende Patientinnen & Patienten", "minutes": 30},
     ],
+    # Dauer von Behandlungsterminen in Minuten (inkl. Vorbereitung), je Behandlung.
+    # Der Kalender bietet nur Uhrzeiten an, an denen die ganze Dauer frei ist.
+    "treatment_minutes": {
+        "hyaluron-faltenbehandlung": 60,
+        "skinbooster-biostimulatoren": 45,
+        "microneedling-mesotherapie": 60,
+        "lipolyse": 45,
+        "bio-botox": 30,
+        "infusionstherapie": 60,
+        "homoeopathische-eigenbluttherapie": 30,
+        "naturheilverfahren-akupunktur": 60,
+        "labordiagnostik": 30,
+        "laser": 60,
+        "allgemein": 60,
+    },
+    "default_treatment_minutes": 60,
 }

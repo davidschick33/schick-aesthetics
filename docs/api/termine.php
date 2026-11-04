@@ -19,7 +19,8 @@ $action = $_GET['action'] ?? 'slots';
 try {
     if ($action === 'slots') {
         maybe_send_reminders();
-        $av = with_store(fn(array &$store) => availability($store), false);
+        $minutes = duration_for((string) ($_GET['type'] ?? 'praxis'), (string) ($_GET['treatment'] ?? ''));
+        $av = with_store(fn(array &$store) => availability($store, $minutes), false);
         $c = cfg();
         json_out(['ok' => true, 'slot_minutes' => $c['slot_minutes'], 'types' => $c['types']] + $av);
     }
@@ -103,7 +104,8 @@ function handle_book(): void
         if (count($active) >= 3) {
             return ['error' => 'Mit dieser E-Mail-Adresse sind bereits mehrere Termine gebucht. Bitte kontaktieren Sie uns direkt.', 'code' => 429];
         }
-        if (!is_slot_bookable($store, $date, $time)) {
+        $duration = duration_for($type, $treatment);
+        if (!is_slot_bookable($store, $date, $time, $duration)) {
             return ['error' => 'Dieser Termin ist leider nicht mehr frei. Bitte wählen Sie einen anderen.', 'code' => 409];
         }
         $b = [
@@ -111,6 +113,7 @@ function handle_book(): void
             'key' => bin2hex(random_bytes(16)),
             'date' => $date,
             'time' => $time,
+            'duration' => $duration,
             'type' => $type,
             'treatment' => $treatment,
             'name' => $name,
@@ -144,7 +147,7 @@ function send_booking_mails(array $b): bool
     $c = cfg();
     $when = date_de($b['date'], $b['time']);
     $cancelUrl = site_url('api/termine.php?action=absagen&id=' . $b['id'] . '&key=' . $b['key']);
-    $details = "Termin:      $when\n"
+    $details = "Termin:      $when (bis " . booking_end($b) . " Uhr)\n"
         . 'Art:         ' . type_label($b['type']) . "\n"
         . 'Interesse:   ' . treatment_label($b['treatment']) . "\n";
 
