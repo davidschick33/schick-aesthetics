@@ -106,6 +106,8 @@ Im Ordner `flyer/` liegt ein Flyer (DIN A5, Vorder- und Rückseite, ohne Preise)
 
 - `Flyer-Dr-Schick-Handy.pdf` sowie `Flyer-Vorderseite.jpg` / `Flyer-Rueckseite.jpg`: zum Anschauen auf dem Handy und zum Teilen (z. B. WhatsApp)
 
+Die PDFs enthalten jede Seite als Bild mit ca. 300 dpi (keine eingebetteten Schriften), damit sie auf jedem Handy und Drucker gleich aussehen. Alle Texte haben mindestens 11–13 mm Abstand zum Rand, damit beim Selbstdrucken nichts abgeschnitten wird.
+
 Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_flyer.js && python3 flyer/make_handy_pdf.py`.
 
 ## Bitte vor dem Livegang prüfen ⚠️
