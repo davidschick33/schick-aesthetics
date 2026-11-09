@@ -12,6 +12,10 @@ ErrorDocument 404 /docs/404.html
 RewriteEngine On
 RewriteBase /
 
+# Adresse ohne "www" dauerhaft auf https://www.schick-aesthetics.com umleiten (eine Adresse für Google)
+RewriteCond %{HTTP_HOST} ^schick-aesthetics\.com$ [NC]
+RewriteRule ^(.*)$ https://www.schick-aesthetics.com/$1 [R=301,L]
+
 # Alte Adresse -> neue Leistungsseite
 RewriteRule ^leistungen/vampirlifting-prp/?$ /leistungen/homoeopathische-eigenbluttherapie/ [R=301,L]
 
