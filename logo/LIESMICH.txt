@@ -1,0 +1,21 @@
+Dr. Schick – Logo-Paket
+=======================
+
+Zwei Logo-Versionen:
+  Logo-komplett  = Dr. Schick + Medical Aesthetics + Gesundheit · Ästhetik · Präzision + Zahnärztin & Heilpraktikerin
+  Wortmarke      = nur "Dr. Schick" mit Gesichtsprofil (für kleine Flächen, Social Media, Stempel)
+
+Vier Farben:
+  gold     Gold-Verlauf wie im Original
+  braun    einfarbig Goldbraun (#5E3F1A) – ideal für Druck, Stempel, Stickerei, Gravur, Folie
+  schwarz  einfarbig Schwarz – für Schwarz-Weiß-Druck, Fax, Formulare
+  weiss    einfarbig Weiß – für dunkle Hintergründe (auf weißem Hintergrund unsichtbar!)
+
+Welches Dateiformat wofür?
+  SVG  Vektor, beliebig skalierbar – Website, Canva, Figma, die meisten Grafikprogramme
+  PDF  Vektor – Druckereien, Word/Pages, zum Weitergeben an Designer
+  EPS  Vektor – Werbetechnik, Schilder, Folienplot, Stickerei, ältere Grafikprogramme
+  PNG  Bild mit transparentem Hintergrund (4000 px breit) – Word, PowerPoint, E-Mail, Instagram
+
+Faustregel: Wenn jemand "das Logo als Vektor" will -> PDF oder SVG schicken.
+Für Werbetechniker / Schilder / Stick -> EPS (oder PDF) in "braun" oder "schwarz".
