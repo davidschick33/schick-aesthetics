@@ -19,3 +19,8 @@ Welches Dateiformat wofür?
 
 Faustregel: Wenn jemand "das Logo als Vektor" will -> PDF oder SVG schicken.
 Für Werbetechniker / Schilder / Stick -> EPS (oder PDF) in "braun" oder "schwarz".
+
+Schriften im Logo (falls ein Designer passend weiterarbeiten möchte):
+  "Dr. Schick"                       Forum (Google Fonts, SIL Open Font License)
+  Textzeilen (Medical Aesthetics …)  Lato (Google Fonts, SIL Open Font License)
+  S und Gesichtsprofil sind gezeichnete Formen, keine Schrift.

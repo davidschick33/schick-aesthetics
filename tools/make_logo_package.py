@@ -62,3 +62,12 @@ for f in made:
     subprocess.run(["gs", "-q", "-dNOPAUSE", "-dBATCH", "-dSAFER", "-sDEVICE=eps2write",
                     f"-sOutputFile={f.with_suffix('.eps')}", str(pdf)], check=True)
 print("ok", len(made), "Varianten")
+
+# ZIP mit allen Dateien und der Anleitung
+import zipfile
+zp = out / "Dr-Schick-Logo-Paket.zip"
+with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
+    for f in sorted(out.iterdir()):
+        if f.suffix in (".svg", ".pdf", ".eps", ".png") or f.name == "LIESMICH.txt":
+            z.write(f, f.name)
+print("ok", zp.name)
