@@ -12,21 +12,36 @@ ErrorDocument 404 /docs/404.html
 RewriteEngine On
 RewriteBase /
 
-# Adresse ohne "www" dauerhaft auf https://www.schick-aesthetics.com umleiten (eine Adresse für Google)
-RewriteCond %{HTTP_HOST} ^schick-aesthetics\.com$ [NC]
-RewriteRule ^(.*)$ https://www.schick-aesthetics.com/$1 [R=301,L]
+# Jede Umleitung führt in EINEM Schritt direkt zur endgültigen Adresse
+# (https + www + Schrägstrich), damit Google keine Umleitungsketten sieht.
+
+# SSL-Zertifikat (Let's Encrypt) nie umleiten
+RewriteRule ^\.well-known/ - [L]
 
 # Alte Adresse -> neue Leistungsseite
-RewriteRule ^leistungen/vampirlifting-prp/?$ /leistungen/homoeopathische-eigenbluttherapie/ [R=301,L]
+RewriteRule ^leistungen/vampirlifting-prp/?$ https://www.schick-aesthetics.com/leistungen/homoeopathische-eigenbluttherapie/ [R=301,L]
 
 # Direkte Aufrufe von /docs/... auf die saubere Adresse umleiten
-RewriteCond %{THE_REQUEST} \s/docs/([^\s?]*) [NC]
-RewriteRule ^ /%1 [R=301,L,NE]
+RewriteCond %{THE_REQUEST} \s/+docs/([^\s?]*) [NC]
+RewriteRule ^ https://www.schick-aesthetics.com/%1 [R=301,L,NE]
 
-# Ordner ohne abschließenden Schrägstrich -> mit Schrägstrich (/preise -> /preise/)
+# /index.html bzw. /ordner/index.html -> /ordner/
+RewriteCond %{THE_REQUEST} \s/+((?:[^\s?]*/)?)index\.html[\s?] [NC]
+RewriteRule ^ https://www.schick-aesthetics.com/%1 [R=301,L,NE]
+
+# Seitenadressen ohne abschließenden Schrägstrich -> mit Schrägstrich (/preise -> /preise/)
+# (gilt für alles ohne Dateiendung; Dateien wie style.css oder termine.php bleiben unberührt)
 RewriteCond %{REQUEST_URI} !^/docs/
-RewriteCond %{DOCUMENT_ROOT}/docs/$1 -d
-RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
+RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]{1,5}$
+RewriteRule ^(.*[^/])$ https://www.schick-aesthetics.com/$1/ [R=301,L]
+
+# http -> https und Adresse ohne "www" -> mit "www" (eine Adresse für Google)
+RewriteCond %{HTTP_HOST} ^schick-aesthetics\.com$ [NC]
+RewriteRule ^(.*)$ https://www.schick-aesthetics.com/$1 [R=301,L,NE]
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteCond %{HTTP_HOST} ^www\.schick-aesthetics\.com$ [NC]
+RewriteRule ^(.*)$ https://www.schick-aesthetics.com/$1 [R=301,L,NE]
 
 # Alles intern aus docs/ ausliefern
 RewriteCond %{REQUEST_URI} !^/docs/
