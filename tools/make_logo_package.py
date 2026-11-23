@@ -12,6 +12,7 @@ out.mkdir(exist_ok=True)
 SOURCES = {
     "Logo-komplett": src / "logo-komplett.svg",   # mit Medical Aesthetics, Claim, Linie, Zahnärztin & Heilpraktikerin
     "Wortmarke": src / "logo-dr-schick.svg",      # nur "Dr. Schick" mit Gesichtsprofil
+    "Bildmarke": src / "logo-bildmarke.svg",      # nur S mit Gesichtsprofil (Grafik, keine Schrift)
 }
 COLORS = {
     "gold": None,          # Gold-Verlauf wie im Original

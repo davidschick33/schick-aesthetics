@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Dr. Schick – Logo-Spezifikation</title>
+<style>
+@font-face { font-family: "Forum"; src: url("../src/assets/fonts/forum-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; src: url("../src/assets/fonts/lato-latin-400-normal.woff2") format("woff2"); }
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Lato", Arial, sans-serif; color: #2b2118; font-size: 9pt; line-height: 1.38; }
+.page { width: 210mm; height: 297mm; padding: 12mm 15mm 14mm; page-break-after: always; position: relative; }
+.page:last-child { page-break-after: auto; }
+h1 { font-family: "Forum", serif; font-weight: 400; font-size: 25pt; margin: 0 0 1mm; color: #5e3f1a; }
+h2 { font-family: "Forum", serif; font-weight: 400; font-size: 15pt; margin: 4mm 0 1.5mm; color: #5e3f1a; border-bottom: 0.3mm solid #d8c8ad; padding-bottom: 1mm; }
+.sub { color: #7a6a58; margin: 0 0 5mm; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; vertical-align: top; padding: 1.1mm 2mm; border-bottom: 0.2mm solid #e6dccb; }
+th { font-weight: 700; color: #5e3f1a; font-size: 8.6pt; text-transform: uppercase; letter-spacing: 0.06em; }
+td.n { white-space: nowrap; }
+.logo { text-align: center; margin: 3mm 0 2mm; }
+.logo img { width: 92mm; }
+.box { background: #f7f2ea; border-radius: 2mm; padding: 3mm 4mm; margin: 3mm 0; }
+.sw { display: inline-block; width: 6mm; height: 6mm; border-radius: 1.5mm; vertical-align: middle; margin-right: 2mm; border: 0.2mm solid rgba(0,0,0,.1); }
+.grad { height: 7mm; border-radius: 1.5mm; background: linear-gradient(90deg,#442707 0%,#5e3f1a 22%,#82633d 40%,#ad9064 50%,#82633d 60%,#5e3f1a 80%,#442707 100%); }
+.forum { font-family: "Forum", serif; font-size: 26pt; color: #5e3f1a; line-height: 1.1; }
+.lato { font-family: "Lato", sans-serif; font-size: 13pt; letter-spacing: 0.3em; color: #5e3f1a; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+.foot { position: absolute; bottom: 6mm; left: 15mm; right: 15mm; font-size: 7.5pt; color: #9a8a76; }
+code { font-family: Menlo, Consolas, monospace; font-size: 8.6pt; background: #f1ebe1; padding: 0.2mm 1mm; border-radius: 0.8mm; }
+ul { margin: 1mm 0; padding-left: 5mm; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <h1>Dr. Schick – Logo-Spezifikation</h1>
+  <p class="sub">Schriften, Größen, Abstände und Farben für Designer und Druckereien</p>
+
+  <div class="logo"><img src="../src/assets/img/logo-komplett.svg" alt="Logo Dr. Schick"></div>
+
+  <div class="box"><b>Wichtig:</b> Bitte für Website und Druck immer die fertigen Logo-Dateien aus dem Logo-Paket verwenden (SVG, PDF oder EPS). Dieses Blatt dient nur dazu, das Logo in einem Grafikprogramm nachzubauen oder passende Texte zu setzen.
+  Das <b>große S mit dem Gesichtsprofil</b> ist eine Grafik und keine Schrift. Es liegt als eigene Datei bei: <code>Dr-Schick-Bildmarke-…</code></div>
+
+  <h2>Schriften</h2>
+  <div class="two">
+    <div>
+      <div class="forum">Dr. chick</div>
+      <p><b>Forum</b> Regular (400)<br>für „Dr.“ und „chick“<br>Google Fonts: fonts.google.com/specimen/Forum</p>
+    </div>
+    <div>
+      <div class="lato" style="margin-top:4mm">MEDICAL AESTHETICS</div>
+      <p style="margin-top:5.5mm"><b>Lato</b> Regular (400), nur Großbuchstaben<br>für alle Zeilen unter dem Namen<br>Google Fonts: fonts.google.com/specimen/Lato</p>
+    </div>
+  </div>
+  <p>Beide Schriften sind kostenlos und stehen unter der SIL Open Font License. Sie dürfen in Logos, im Druck und auf Websites verwendet werden.</p>
+
+  <h2>Farben</h2>
+  <div class="grad"></div>
+  <p style="margin:1.5mm 0 3mm">Gold-Verlauf, diagonal von links unten nach rechts oben: <code>#442707</code> 0 % · <code>#5E3F1A</code> 22 % · <code>#82633D</code> 40 % · <code>#AD9064</code> 50 % · <code>#82633D</code> 60 % · <code>#5E3F1A</code> 80 % · <code>#442707</code> 100 %</p>
+  <table>
+    <tr><td><span class="sw" style="background:#5e3f1a"></span><b>Goldbraun</b> – Hauptfarbe, einfarbig (Druck, Stempel, Stick)</td><td class="n"><code>#5E3F1A</code> · RGB 94/63/26 · ca. CMYK 0/33/72/63</td></tr>
+    <tr><td><span class="sw" style="background:#82633d"></span><b>Gold mittel</b></td><td class="n"><code>#82633D</code> · RGB 130/99/61</td></tr>
+    <tr><td><span class="sw" style="background:#ad9064"></span><b>Gold hell</b> (Glanz)</td><td class="n"><code>#AD9064</code> · RGB 173/144/100</td></tr>
+    <tr><td><span class="sw" style="background:#442707"></span><b>Gold dunkel</b></td><td class="n"><code>#442707</code> · RGB 68/39/7</td></tr>
+  </table>
+  <p style="font-size:8pt;color:#7a6a58">CMYK-Werte sind Richtwerte; für Gold im Druck kann auch eine Sonderfarbe/Heißfolie verwendet werden.</p>
+
+  <div class="foot">Dr. Karina Schick – Medical Aesthetics · Logo-Spezifikation · Seite 1/2</div>
+</section>
+
+<section class="page">
+  <h1>Größen und Abstände</h1>
+  <p class="sub">Alle Werte für das <b>komplette Logo mit 200 mm Breite</b> (= 125,2 mm Höhe). Für andere Größen alle Werte im gleichen Verhältnis umrechnen: Faktor = gewünschte Breite ÷ 200 mm.</p>
+
+  <h2>„Dr. Schick“ – Forum Regular</h2>
+  <table>
+    <tr><th>Teil</th><th>Schriftgröße</th><th>Besonderheit</th></tr>
+    <tr><td>c, i, c</td><td class="n">161 pt</td><td>–</td></tr>
+    <tr><td>h</td><td class="n">167 pt</td><td>–</td></tr>
+    <tr><td>k</td><td class="n">169 pt</td><td>horizontal auf 110 % gestreckt</td></tr>
+    <tr><td>D</td><td class="n">128 pt</td><td>horizontal auf 111 % gestreckt</td></tr>
+    <tr><td>r</td><td class="n">114 pt</td><td>–</td></tr>
+    <tr><td>Punkt</td><td class="n">104 pt</td><td>–</td></tr>
+    <tr><td>S mit Gesicht</td><td class="n">Grafik</td><td>Datei „Bildmarke“, 50,6 mm breit × 75,8 mm hoch</td></tr>
+  </table>
+  <p>Alle Buchstaben stehen auf einer gemeinsamen Grundlinie, <b>58,2 mm</b> unter der Oberkante des Logos. Die Buchstaben sind einzeln an die Positionen des Original-Logos gesetzt; die Abstände bitte aus der Logo-Datei übernehmen.</p>
+
+  <h2>Textzeilen – Lato Regular, Großbuchstaben</h2>
+  <table>
+    <tr><th>Zeile</th><th>Größe</th><th>Laufweite*</th><th>Grundlinie**</th></tr>
+    <tr><td>MEDICAL AESTHETICS</td><td class="n">28,8 pt</td><td class="n">320</td><td class="n">92,1 mm</td></tr>
+    <tr><td>GESUNDHEIT · ÄSTHETIK · PRÄZISION</td><td class="n">19,1 pt</td><td class="n">290</td><td class="n">105,6 mm</td></tr>
+    <tr><td>Trennlinie</td><td class="n">0,38 mm dick</td><td class="n">127 mm lang</td><td class="n">113,5 mm</td></tr>
+    <tr><td>ZAHNÄRZTIN &amp; HEILPRAKTIKERIN</td><td class="n">17,9 pt</td><td class="n">240</td><td class="n">124,8 mm</td></tr>
+  </table>
+  <p style="font-size:8.4pt">* Laufweite in 1/1000 Geviert (Illustrator/InDesign „Laufweite“, Figma/CSS: 320 = <code>letter-spacing: 0.32em</code>, 290 = <code>0.29em</code>, 240 = <code>0.24em</code>).<br>
+  ** Abstand der Grundlinie von der Oberkante des Logos. Alle Zeilen und die Linie sind waagerecht mittig zum Logo ausgerichtet.<br>
+  Die Mittelpunkte „·“ sind normale Mittelpunkte (U+00B7) in Lato mit einem großen Wortabstand davor und danach.</p>
+
+  <h2>Dateien im Logo-Paket</h2>
+  <table>
+    <tr><td class="n"><b>Logo-komplett</b></td><td>Name, Bildmarke und alle Zeilen</td></tr>
+    <tr><td><b>Wortmarke</b></td><td>nur „Dr. Schick“ mit Gesicht (für kleine Flächen, Website-Kopf)</td></tr>
+    <tr><td><b>Bildmarke</b></td><td>nur das S mit Gesichtsprofil (Profilbild, Favicon, Stempel)</td></tr>
+    <tr><td><b>Formate</b></td><td>SVG und PDF (Vektor), EPS (Werbetechnik), PNG 4000 px (transparent) – jeweils in Gold, Braun, Schwarz und Weiß</td></tr>
+  </table>
+  <div class="box"><b>Schutzzone:</b> Rund um das Logo mindestens 10 % der Logobreite frei lassen (bei 200 mm Breite: 20 mm). <b>Mindestgröße:</b> Logo-komplett 50 mm breit (sonst wird die unterste Zeile zu klein), Wortmarke 25 mm, Bildmarke 8 mm.</div>
+
+  <div class="foot">Dr. Karina Schick – Medical Aesthetics · Logo-Spezifikation · Seite 2/2</div>
+</section>
+</body>
+</html>

@@ -122,6 +122,6 @@ Texte ändern in `flyer/flyer.html`, danach neu erzeugen mit `node flyer/make_fl
 8. **Sprechzeiten für die Online-Buchung**: Dienstag 8–14 Uhr und Samstag 11–14 Uhr alle 3 Wochen ab 21. November 2026 (änderbar in `content.py` → `BOOKING`).
 9. **Model-Fotos**: Bitte sicherstellen, dass ihr die Nutzungsrechte an den drei Model-Bildern habt, z. B. eine Lizenz der Bildagentur oder des Herstellers.
 10. **Homöopathische Eigenbluttherapie**: Der Text ist neu und allgemein formuliert. Bitte fachlich gegenlesen.
-11. **Logo**: Reinzeichnung. Gesicht und S wurden aus dem Foto vektorisiert und geglättet. Alle Buchstaben sind echte Schrift-Konturen: „Dr. Schick“ in *Forum*, die Textzeilen in *Lato* (beide frei nutzbar, SIL Open Font License, auch für Logos). Liegt die Original-Datei (SVG, PDF oder AI) vor, kann sie die Dateien `src/assets/img/logo-*.svg` ersetzen.
+11. **Logo**: Reinzeichnung. Alle Buchstaben sind echte Schrift-Konturen: „Dr. Schick“ in *Forum*, die Textzeilen in *Lato* (beide SIL Open Font License, auch für Logos frei). Das S und das Gesichtsprofil sind neu gezeichnete, glatte Formen (Bildmarke `src/assets/img/logo-bildmarke.svg`). Schriftgrößen, Laufweiten, Abstände und Farben für Designer: `logo/Dr-Schick-Logo-Spezifikation.pdf` (Quelle `tools/logo-spezifikation.html`, erzeugen mit `node tools/make_logo_spec.js`).
 
 **Bewusst nicht veröffentlicht:** Steuernummer, Steuer-ID, Kontonummer und die Privatadresse.
