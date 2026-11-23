@@ -48,11 +48,21 @@ const fs = require("fs"); const path = require("path");
     const white = f.includes("-weiss");
     await p.setContent(`<style>@page{size:${wMm}mm ${hMm}mm;margin:0}*{margin:0}body{background:${white ? "#5e3f1a" : "transparent"}}img{display:block;width:${wMm}mm;height:${hMm}mm}</style><img src="data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}">`);
     await p.pdf({ path: f.replace(/\.svg$/, ".pdf"), width: wMm + "mm", height: hMm + "mm", printBackground: false });
-    const pxW = 4000, pxH = Math.round(pxW * ratio);
-    const q = await b.newPage({ viewport: { width: pxW, height: pxH } });
-    await q.setContent(`<style>*{margin:0}body{background:transparent}img{display:block;width:${pxW}px;height:${pxH}px}</style><img src="data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}">`);
-    await q.screenshot({ path: f.replace(/\.svg$/, ".png"), omitBackground: true });
-    await p.close(); await q.close();
+    const pxW = ratio > 1 ? Math.round(4000 / ratio) : 4000, pxH = Math.round(pxW * ratio);  // längere Seite 4000 px
+    await p.close();
+    // Große Screenshots schlagen im Headless-Browser gelegentlich fehl: bis zu 3 Versuche
+    for (let attempt = 1; ; attempt++) {
+      const q = await b.newPage({ viewport: { width: pxW, height: pxH } });
+      try {
+        await q.setContent(`<style>*{margin:0}body{background:transparent}img{display:block;width:${pxW}px;height:${pxH}px}</style><img src="data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}">`);
+        await q.screenshot({ path: f.replace(/\.svg$/, ".png"), omitBackground: true });
+        await q.close();
+        break;
+      } catch (e) {
+        await q.close();
+        if (attempt >= 3) throw e;
+      }
+    }
   }
   await b.close();
 })();
