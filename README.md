@@ -1,6 +1,6 @@
 # Dr. Schick Medical Aesthetics – Website
 
-Website für **Dr. Karina Schick, Zahnärztin & Heilpraktikerin**, Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg.
+Website für **Dr. Karina Schick, Zahnärztin & Heilpraktikerin**, Dr. Karina Schick – Medical Aesthetics, Neustraße 30, 56457 Westerburg.
 Ziel-Domain: <https://www.schick-aesthetics.com>
 
 Eine schnelle, statische Website ohne Baukasten, ohne Cookies und ohne Tracking. Die fertigen Seiten liegen im Ordner **`docs/`**.

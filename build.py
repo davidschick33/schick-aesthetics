@@ -598,7 +598,7 @@ def page_home():
     <div>
       <p class="eyebrow">{SITE["profession"]} · {SITE["city"]}</p>
       <h1>Ästhetische Medizin &amp; Naturheilkunde in Westerburg – <span class="serif-i">natürlich schön</span></h1>
-      <p class="lead">Ich bin Dr. Karina Schick – seit 25 Jahren Zahnärztin und heute zusätzlich Heilpraktikerin. In der Praxis auf Schloß Westerburg verbinde ich zahnmedizinische Präzision mit meiner Leidenschaft für Ästhetik: Ihre natürliche Ausstrahlung sichtbar machen, statt Sie zu verändern.</p>
+      <p class="lead">Ich bin Dr. Karina Schick – seit 25 Jahren Zahnärztin und heute zusätzlich Heilpraktikerin. In meiner Praxis in Westerburg verbinde ich zahnmedizinische Präzision mit meiner Leidenschaft für Ästhetik: Ihre natürliche Ausstrahlung sichtbar machen, statt Sie zu verändern.</p>
       <div class="btn-row">
         <a class="btn" href="{booking_href(p, "?art=praxis")}">{ICONS["calendar"]} Erstgespräch buchen</a>
         <a class="btn btn-ghost" href="{booking_href(p, "?art=telefon")}">{ICONS["chat"]} Telefonische Beratung</a>
@@ -732,8 +732,8 @@ def page_home():
   <div class="container grid grid-2" style="align-items:center">
     <div class="reveal">
       <p class="eyebrow">Praxis im Westerwald</p>
-      <h2>Die Praxis auf Schloß Westerburg</h2>
-      <p>Die Praxis befindet sich im historischen Schloß Westerburg – gut erreichbar aus Westerburg, Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod und Limburg an der Lahn.</p>
+      <h2>Die Praxis in Westerburg</h2>
+      <p>Die Praxis befindet sich in der {SITE["street"]} in {SITE["zip"]} {SITE["city"]} – gut erreichbar aus Westerburg, Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod und Limburg an der Lahn.</p>
       <p><strong>{SITE["hours"]}</strong></p>
     </div>
     <div class="glass panel reveal">
@@ -761,7 +761,7 @@ def page_about():
     }
     p = page["path"]
     page["body"] = f"""
-{page_hero(page, "Über mich", "Dr. Karina Schick – Zahnärztin, Heilpraktikerin, Mutter von 4 Kindern", "Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin. Heute verbinde ich diese Erfahrung mit meiner Begeisterung für Ästhetik und Naturheilkunde – in der Praxis auf Schloß Westerburg.")}
+{page_hero(page, "Über mich", "Dr. Karina Schick – Zahnärztin, Heilpraktikerin, Mutter von 4 Kindern", "Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin. Heute verbinde ich diese Erfahrung mit meiner Begeisterung für Ästhetik und Naturheilkunde – in meiner Praxis in Westerburg.")}
 <section class="section-sm">
   <div class="container split">
     <div class="portrait reveal" style="margin-inline:0">
@@ -1132,8 +1132,8 @@ def page_booking():
 def page_contact():
     page = {
         "path": "kontakt/",
-        "title": "Kontakt & Anfahrt – Praxis Schloß Westerburg | Dr. Schick",
-        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Schloß Westerburg, 56457 Westerburg. E-Mail: praxis@schick-aesthetics.com – Termine nach Vereinbarung.",
+        "title": "Kontakt & Anfahrt – Praxis in Westerburg | Dr. Schick",
+        "description": "Kontakt und Anfahrt zur Praxis Dr. Karina Schick, Neustraße 30, 56457 Westerburg. E-Mail: praxis@schick-aesthetics.com – Termine nach Vereinbarung.",
         "crumbs": [("Start", ""), ("Kontakt", "kontakt/")],
         "page_type": "ContactPage",
     }
@@ -1154,7 +1154,7 @@ def page_contact():
     </div>
     <div class="glass panel reveal">
       <h2>Anfahrt</h2>
-      <p>Die Praxis befindet sich im Schloß Westerburg im Herzen des Westerwalds. Aus Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod oder Limburg an der Lahn erreichen Sie Westerburg bequem mit dem Auto; der Bahnhof Westerburg liegt ebenfalls in der Nähe.</p>
+      <p>Die Praxis befindet sich in der {SITE["street"]} in {SITE["zip"]} {SITE["city"]}, im Herzen des Westerwalds. Aus Montabaur, Hachenburg, Bad Marienberg, Rennerod, Wallmerod oder Limburg an der Lahn erreichen Sie Westerburg bequem mit dem Auto; der Bahnhof Westerburg liegt ebenfalls in der Nähe.</p>
       <p><a class="btn btn-ghost" href="{SITE["maps_url"]}" target="_blank" rel="noopener">{ICONS["pin"]} Route in Google Maps planen</a></p>
       <p class="small muted">Datenschutzhinweis: Die Karte wird erst nach Klick auf den Link bei Google Maps geöffnet. Auf dieser Website werden keine Kartendienste eingebunden.</p>
     </div>
@@ -1170,7 +1170,7 @@ def page_imprint():
     page = {
         "path": "impressum/",
         "title": "Impressum | Dr. Karina Schick – Medical Aesthetics",
-        "description": "Impressum der Website schick-aesthetics.com – Dr. Karina Schick – Medical Aesthetics, Schloß Westerburg, 56457 Westerburg.",
+        "description": "Impressum der Website schick-aesthetics.com – Dr. Karina Schick – Medical Aesthetics, Neustraße 30, 56457 Westerburg.",
         "crumbs": [("Start", ""), ("Impressum", "impressum/")],
     }
     phone = f"<br>Telefon: {esc(SITE['phone_display'] or SITE['phone'])}" if SITE["phone"] else ""

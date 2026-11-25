@@ -24,13 +24,13 @@ SITE = {
     # Externes Online-Buchungstool (z. B. Doctolib, Calendly, Planity).
     # Leer = Terminanfrage-Formular auf /termin-buchen/ wird genutzt.
     "booking_url": "",
-    "street": "Schloß Westerburg",
+    "street": "Neustraße 30",
     "zip": "56457",
     "city": "Westerburg",
     "region": "Rheinland-Pfalz",
     "region_short": "Westerwald",
     "country": "DE",
-    "maps_url": "https://www.google.com/maps/search/?api=1&query=Schlo%C3%9F+Westerburg%2C+56457+Westerburg",
+    "maps_url": "https://www.google.com/maps/search/?api=1&query=Neustra%C3%9Fe+30%2C+56457+Westerburg",
     "hours": "Termine nach Vereinbarung",
     # Google-Bewertungslink ("Rezensionen einholen" im Unternehmensprofil). Leer = Google-Suche nach der Praxis.
     # Der QR-Code auf der Bewertungskarte zeigt auf /bewertung/ und leitet hierhin weiter.

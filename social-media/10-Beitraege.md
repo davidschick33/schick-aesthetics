@@ -14,31 +14,31 @@ Für Instagram, Facebook und TikTok. Texte zum Kopieren. Alle Beiträge sind so 
 
 > Hallo, ich bin Karina 👋
 >
-> Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin – und jetzt auch Heilpraktikerin. In der Praxis auf Schloß Westerburg verbinde ich zahnmedizinische Präzision mit meiner Liebe zur Ästhetik und Naturheilkunde.
+> Seit 25 Jahren bin ich mit Leidenschaft Zahnärztin – und jetzt auch Heilpraktikerin. In meiner Praxis in Westerburg verbinde ich zahnmedizinische Präzision mit meiner Liebe zur Ästhetik und Naturheilkunde.
 >
 > Mein Ziel: Ihre natürliche Ausstrahlung sichtbar machen – nicht Sie verändern.
 >
 > Ich freue mich, Sie kennenzulernen! ✨
 >
-> 📍 Schloß Westerburg · Termin über den Link in der Bio
+> 📍 Neustraße 30, Westerburg · Termin über den Link in der Bio
 
 **Hashtags:** #DrSchick #Westerburg #Westerwald #ÄsthetischeMedizin #Naturheilkunde #Heilpraktikerin #Zahnärztin #NatürlichSchön
 
 ---
 
-## 2. Die Praxis auf Schloß Westerburg
+## 2. Die Praxis in Westerburg
 
-**Format:** 3–5 Fotos als Karussell: Schloss von außen, Eingang, Behandlungsraum, Detailfoto
+**Format:** 3–5 Fotos als Karussell: Praxis von außen, Eingang, Behandlungsraum, Detailfoto
 
 **Text:**
 
-> Willkommen auf Schloß Westerburg 🏰
+> Willkommen in meiner Praxis in der Neustraße 30 in Westerburg ✨
 >
 > Hier, mitten im Westerwald, empfange ich Sie in ruhiger Atmosphäre – mit Zeit für ein ausführliches Gespräch und eine Behandlung ohne Hektik.
 >
 > Gut erreichbar aus Westerburg, Montabaur, Hachenburg, Bad Marienberg, Rennerod und Limburg.
 
-**Hashtags:** #SchloßWesterburg #Westerwald #Praxis #Montabaur #Hachenburg #Limburg #ÄsthetischeMedizin
+**Hashtags:** #Westerburg #Westerwald #Praxis #Montabaur #Hachenburg #Limburg #ÄsthetischeMedizin
 
 ---
 
